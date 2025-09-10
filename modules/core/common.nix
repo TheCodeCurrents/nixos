@@ -34,7 +34,9 @@
 		git
 		alacritty
 		direnv
-    nmcli
+		htop
+		btop
+		networkmanager
 	];
 
 	fonts.packages = with pkgs; [
