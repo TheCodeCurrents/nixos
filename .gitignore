@@ -1,0 +1,17 @@
+# Nix build artifacts
+/result
+/result-*
+/.nix-gc-*
+/.nix-defexpr
+/.cache
+/.direnv
+/.envrc
+*.swp
+*.tmp
+*.bak
+
+# VS Code
+.vscode/
+
+# System-specific
+hardware-configuration.nix
