@@ -12,6 +12,3 @@
 
 # VS Code
 .vscode/
-
-# System-specific
-hardware-configuration.nix

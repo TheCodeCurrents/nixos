@@ -34,6 +34,7 @@
 		git
 		alacritty
 		direnv
+    nmcli
 	];
 
 	fonts.packages = with pkgs; [
