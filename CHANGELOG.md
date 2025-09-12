@@ -7,9 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## Fixed
+### Fixed
 
 - gitignore to include hardware-configuration.nix
+
+### Added
+
+- installed Steam and other gaming clients
+- long term goals to TODO list
 
 ## [0.0.1] - 2025-09-10
 
