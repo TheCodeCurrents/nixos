@@ -19,7 +19,6 @@
 
     discord
     mangohud
-    mangohud-full
   ];
 
   # Optional: Open firewall for Steam multiplayer
