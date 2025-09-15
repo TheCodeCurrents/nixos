@@ -13,7 +13,7 @@ This file holds all my current TODOs and long term goals for this setup.
 
 ## Long Term Goals
 
-- [ ] Gaming setup
+- [x] Gaming setup
     - [x] Steam and other launchers
     - [x] Minecraft Modlaunchers
     - [x] Discord
