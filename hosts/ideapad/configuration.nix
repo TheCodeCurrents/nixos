@@ -7,18 +7,26 @@
       ./hardware-configuration.nix
     ];
 
+  # OpenGL
+  hardware.opengl = {
+    enable = true;
+    driSupport = true;
+    driSupport32Bit = true;
+  };
 
-  networking.hostName = "ideapad"; # Define your hostname.
+  services.xserver.videoDrivers = [ "amdgpu" ];
+
+  networking.hostName = "ideapad";
   networking.networkmanager.enable = true;
 
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.jflocke = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [ "wheel" "networkmanager" ];
     packages = with pkgs; [
       tree
-      networkmanager_dmenu  # dmenu-based Wi-Fi selector
+      networkmanager_dmenu
       networkmanager
     ];
   };

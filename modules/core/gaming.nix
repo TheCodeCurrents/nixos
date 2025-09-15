@@ -1,6 +1,7 @@
 { config, pkgs, ... }:
 
 {
+
   # Enable Steam
   programs.steam = {
     enable = true;
@@ -12,9 +13,13 @@
   # Optional: Add 32-bit libraries for compatibility
   environment.systemPackages = with pkgs; [
     steam
-    # Add additional 32-bit libraries if needed
-    # libglvnd-32bit
-    # alsaLib-32bit
+    prismlauncher-unwrapped
+    lutris-unwrapped
+    heroic-unwrapped
+
+    discord
+    mangohud
+    mangohud-full
   ];
 
   # Optional: Open firewall for Steam multiplayer

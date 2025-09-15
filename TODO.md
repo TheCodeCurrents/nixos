@@ -14,12 +14,10 @@ This file holds all my current TODOs and long term goals for this setup.
 ## Long Term Goals
 
 - [ ] Gaming setup
-    - [ ] Steam and other launchers
-    - [ ] Minecraft Modlaunchers
-    - [ ] RetroDeck
-    - [ ] Game mode tweaks
-    - [ ] Discord
-    - [ ] Overlay
+    - [x] Steam and other launchers
+    - [x] Minecraft Modlaunchers
+    - [x] Discord
+    - [x] Overlay
 - [ ] Terminal setup
     - [ ] tmux and zellij
     - [ ] fish shell
@@ -50,10 +48,21 @@ This file holds all my current TODOs and long term goals for this setup.
     - [ ] LaTeX
     - [ ] Obsidian
     - [ ] Notion
--[ ] Workstation setup
+-[ ] Workstation stuff
     - [ ] DaVinci Resolve
     - [ ] Blender
     - [ ] GIMP
     - [ ] LibreSprite
     - [ ] LibreOffice
     - [ ] OnlyOffice
+- [ ] All the apps I need
+
+- [ ] Devices
+    - [x] Old Laptop
+        - [x] AMD iGPU
+    -  [ ] Yoga
+        - [ ] Intel iGPU
+        - [ ] Nvidia dGPU
+    - [ ] Desktop
+        - [ ] Intel iGPU
+        - [ ] Nvidia dGPU

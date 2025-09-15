@@ -4,7 +4,7 @@
 {
 
 	imports = [
-    ./steam.nix
+    ./gaming.nix
   ];
 
 	boot.loader.systemd-boot.enable = true;
