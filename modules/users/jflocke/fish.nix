@@ -11,4 +11,8 @@
             btw = "echo I use nixos, btw";
         };
     };
+
+    home.sessionVariables = {
+        SHELL = "${pkgs.fish}/bin/fish";
+    };
 }

@@ -22,8 +22,8 @@ This file holds all my current TODOs and long term goals for this setup.
     - [ ] tmux and zellij
         - [ ] installed
         - [ ] configured
-    - [ ] fish shell
-    - [ ] starship
+    - [x] fish shell
+    - [x] starship
     - [ ] cli tools
 - [ ] Development setup
     - [ ] global devshells using devenv
