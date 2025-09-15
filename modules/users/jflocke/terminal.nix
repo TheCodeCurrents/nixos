@@ -1,6 +1,7 @@
 { config, pkgs, ... }:
 
 {
+    # Shell setup
     programs.fish = {
         enable = true;
         interactiveShellInit = ''
@@ -12,6 +13,11 @@
         };
     };
 
+    home.sessionVariables = {
+        SHELL = "${pkgs.fish}/bin/fish";
+    };
+
+    # Starship prompt
     programs.starship = {
         enable = true;
         # Configuration written to ~/.config/starship.toml
@@ -27,6 +33,7 @@
         };
     };
 
+    # zoxide for smarter cd
     programs.zoxide = {
         enable = true;
         enableFishIntegration = true;
@@ -35,7 +42,11 @@
         ];
     };
 
-    home.sessionVariables = {
-        SHELL = "${pkgs.fish}/bin/fish";
+    # fzf configuration
+    programs.fzf = {
+        enable = true;
+        enableFishIntegration = true;
+        # Optionally, you can add extra options:
+        # defaultOptions = [ "--height 40%" "--border" ];
     };
 }
