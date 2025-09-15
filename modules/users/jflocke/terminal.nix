@@ -33,6 +33,10 @@
         };
     };
 
+    # catppuccin theme
+    catppuccin.enable = true;
+    catppuccin.flavor = "mocha"; # Options: latte, frappe, macchiato, mocha
+
     # zoxide for smarter cd
     programs.zoxide = {
         enable = true;

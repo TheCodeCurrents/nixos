@@ -6,9 +6,13 @@
             url = "github:nix-community/home-manager/release-25.05";
             inputs.nixpkgs.follows = "nixpkgs";
         };
+        catppuccin = {
+            url = "github:catppuccin/nix/release-25.05";
+            inputs.nixpkgs.follows = "nixpkgs";
+        };
     };
 
-    outputs = { self, nixpkgs, home-manager, ... }: {
+    outputs = { self, nixpkgs, catppuccin, home-manager, ... }: {
         nixosConfigurations.ideapad = nixpkgs.lib.nixosSystem {
             system = "x86_64-Linux";
             modules = [
@@ -18,7 +22,10 @@
                     home-manager = {
                         useGlobalPkgs = true;
                         useUserPackages = true;
-                        users.jflocke = import ./modules/users/jflocke/home.nix;
+                        users.jflocke = imports [
+                            ./modules/users/jflocke/home.nix
+                            catppuccin.homeManagerModules.catppuccin
+                        ];
                         backupFileExtension = "backup";
                     };
                 }
