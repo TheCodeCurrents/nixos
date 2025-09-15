@@ -2,7 +2,11 @@
 {
     home.username = "jflocke";
     home.homeDirectory = "/home/jflocke";
-    
+
+    imports = [
+        ./fish.nix
+    ];
+
     programs.git = {
         enable = true;
         userName  = "Jakob Flocke";
