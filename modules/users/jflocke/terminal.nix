@@ -27,6 +27,12 @@
         };
     };
 
+    programs.zoxide = {
+        enable = true;
+        enableFishIntegration = true;
+        options = "--cmd cd" ;
+    };
+
     home.sessionVariables = {
         SHELL = "${pkgs.fish}/bin/fish";
     };
