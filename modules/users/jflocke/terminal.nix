@@ -49,4 +49,9 @@
         # Optionally, you can add extra options:
         # defaultOptions = [ "--height 40%" "--border" ];
     };
+
+    # Terminal utilities
+    home.packages = with pkgs; [
+        bat
+    ];
 }
