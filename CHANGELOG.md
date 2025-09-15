@@ -26,6 +26,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - nvim package
 - README with features and structure
 - CHANGELOG template
-- TODO list for future improvements
+- TODO-list for future improvements
 - QTile as initial window manager
 - gitignore file

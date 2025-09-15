@@ -13,24 +13,7 @@
     };
 
     home.packages = with pkgs; [
-        ripgrep
-        fd
-        bat
-        eza
-        # starship
-        tmux
-        zoxide
-        fzf
-        curl
-        zellij
     ];
-
-    programs.bash = {
-        enable = true;
-        shellAliases = {
-            btw = "echo I use nixos, btw";
-        };
-    };
 
     home.stateVersion = "25.05";
 }
