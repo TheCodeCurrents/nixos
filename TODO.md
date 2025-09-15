@@ -20,9 +20,11 @@ This file holds all my current TODOs and long term goals for this setup.
     - [x] Overlay
 - [ ] Terminal setup
     - [ ] tmux and zellij
+        - [ ] installed
+        - [ ] configured
     - [ ] fish shell
     - [ ] starship
-    - [ ] many many cli tools
+    - [ ] cli tools
 - [ ] Development setup
     - [ ] global devshells using devenv
         - [ ] Rust (default, Bevy, ...)
