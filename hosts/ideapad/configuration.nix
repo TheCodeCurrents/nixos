@@ -25,6 +25,5 @@
 
   programs.firefox.enable = true;
 
-
 }
 
