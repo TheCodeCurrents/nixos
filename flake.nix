@@ -22,10 +22,12 @@
                     home-manager = {
                         useGlobalPkgs = true;
                         useUserPackages = true;
-                        users.jflocke = imports [
-                            ./modules/users/jflocke/home.nix
-                            catppuccin.homeManagerModules.catppuccin
-                        ];
+                        users.jflocke = {
+                            imports = [
+                                ./modules/users/jflocke/home.nix
+                                catppuccin.homeManagerModules.catppuccin
+                          ];
+                        };
                         backupFileExtension = "backup";
                     };
                 }

@@ -36,6 +36,13 @@
     # catppuccin theme
     catppuccin.enable = true;
     catppuccin.flavor = "mocha"; # Options: latte, frappe, macchiato, mocha
+    
+    programs = {
+        bat.catppuccin. enable = true;
+        starship.catppuccin.enable = true;
+        fish.catppuccin.enable = true;
+        alacritty.catppuccin.enable = true;
+    };
 
     # zoxide for smarter cd
     programs.zoxide = {
