@@ -80,6 +80,16 @@
         ];
     };
 
+    home.shellAliases = {
+        ls = "eza";
+        ll = "eza -la --long";
+        l = "eza -la --long --git";
+        cat = "bat";
+        c = "clear";
+        f = "fzf";
+        tldr = "tlrc";
+    };
+
     # Terminal utilities
     home.packages = with pkgs; [
         bat
