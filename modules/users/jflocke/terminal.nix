@@ -43,7 +43,8 @@
         fish.catppuccin.enable = true;
         alacritty.catppuccin.enable = true;
         btop.catppuccin.enable = true;
-        eza.catppuccin.enable = true;
+        fzf.catppuccin.enable = true;
+        # eza.catppuccin.enable = true;
     };
 
     # zoxide for smarter cd
@@ -67,6 +68,7 @@
         enable = true;
         enableFishIntegration = true;
         icons = "auto";
+        colors = "auto";
         git = true;
         extraOptions = [
             "--group-directories-first"
@@ -92,12 +94,18 @@
 
     # Terminal utilities
     home.packages = with pkgs; [
-        bat
-        tldr 
-        scc
-        btop
+        bat             # Better cat
+        tldr            # Simplified man pages
+        scc             # Sloc, complexity and code metrics
+        btop            # Resource monitor
+        procs           # Better top command
+        ripgrep         # Fast grep alternative
+        tree            # Tree command replacement
+        gping           # Ping with a graph
+        speedtest-cli   # Speed test from terminal
+        ddgr            # DuckDuckGo search from terminal
+        lazygit         # A simple terminal UI for git commands
+        asciinema       # Terminal screen recorder
     ];
-
-    
     
 }
