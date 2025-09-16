@@ -87,7 +87,6 @@
         ll = "eza -la --long";
         l = "eza -la --long --git";
         cat = "bat";
-        c = "clear";
         f = "fzf";
         tldr = "tlrc";
     };
