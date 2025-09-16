@@ -42,6 +42,8 @@
         starship.catppuccin.enable = true;
         fish.catppuccin.enable = true;
         alacritty.catppuccin.enable = true;
+        btop.catppuccin.enable = true;
+        eza.catppuccin.enable = true;
     };
 
     # zoxide for smarter cd
@@ -61,8 +63,17 @@
         # defaultOptions = [ "--height 40%" "--border" ];
     };
 
+    programs.eza = {
+        enable = true;
+        enableFishIntegration = true;
+    };
+
     # Terminal utilities
     home.packages = with pkgs; [
         bat
+        tldr 
+        scc
+        btop
     ];
+    
 }
