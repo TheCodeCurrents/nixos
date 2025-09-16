@@ -24,7 +24,7 @@ This file holds all my current TODOs and long term goals for this setup.
         - [ ] configured
     - [x] fish shell
     - [x] starship
-    - [ ] cli tools
+    - [x] cli tools
 - [ ] Development setup
     - [ ] global devshells using devenv
         - [ ] Rust (default, Bevy, ...)

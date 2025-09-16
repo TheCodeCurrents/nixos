@@ -82,6 +82,11 @@
         ];
     };
 
+    programs.zellij = {
+        enable = true;
+        enableFishIntegration = true;
+    };
+
     home.shellAliases = {
         ls = "eza";
         ll = "eza -la --long";
