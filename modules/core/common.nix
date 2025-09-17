@@ -3,7 +3,7 @@
 
 {
 
-	system.nixos.label = "NixOS - configuration v0.2.0";
+	boot.loader.systemd.configurationName = "MyCustomBoot";
 
 	imports = [
     ./gaming.nix
