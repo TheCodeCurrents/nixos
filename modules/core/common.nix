@@ -22,6 +22,16 @@
 		autoRepeatInterval = 35;
 		windowManager.qtile.enable = true;
 	};
+
+	wayland.windowManager.hyprland = {
+		enable = true;
+		settings = {
+			modKey = "SUPER";
+			# wallpaper = "/home/jflocke/Pictures/wallpapers/archlinux-wallpaper.jpg";
+			wallpaperMode = "fill";
+		};
+	};
+
 	services.displayManager.ly.enable = true;
 	services.xserver.xkb.layout = "de";
 	services.printing.enable = true;
