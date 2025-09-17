@@ -85,6 +85,13 @@
     programs.zellij = {
         enable = true;
         enableFishIntegration = true;
+        catppuccin.enable = true;
+        settings = {
+            simplifiedui = true;
+            show_startup_tips = false;
+            pane_frames = false;
+            default_shell = "${pkgs.fish}/bin/fish";
+        };
     };
 
     home.shellAliases = {

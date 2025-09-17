@@ -3,11 +3,11 @@ This file holds all my current TODOs and long term goals for this setup.
 
 ## Short Term Memory
 
-- [ ] install steam
-- [ ] install prism
+- [x] install steam
+- [x] install prism
 - [ ] install lutris
-- [ ] install heroic
-- [ ] install mangohud
+- [x] install heroic
+- [x] install mangohud
 
 - [ ] enable flatpak support
 
@@ -18,10 +18,10 @@ This file holds all my current TODOs and long term goals for this setup.
     - [x] Minecraft Modlaunchers
     - [x] Discord
     - [x] Overlay
-- [ ] Terminal setup
+- [x] Terminal setup
     - [ ] tmux and zellij
-        - [ ] installed
-        - [ ] configured
+        - [x] installed
+        - [x] configured
     - [x] fish shell
     - [x] starship
     - [x] cli tools
@@ -31,6 +31,7 @@ This file holds all my current TODOs and long term goals for this setup.
         - [ ] Python (default, ML, ...)
         - [ ] Svelte
 - [ ] WMs and DEs
+    -> look into eww
     - [ ] Qtile
         - [ ] configure
     - [ ] Hyprland
