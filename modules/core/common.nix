@@ -25,11 +25,6 @@
 
 	wayland.windowManager.hyprland = {
 		enable = true;
-		settings = {
-			modKey = "SUPER";
-			# wallpaper = "/home/jflocke/Pictures/wallpapers/archlinux-wallpaper.jpg";
-			wallpaperMode = "fill";
-		};
 	};
 
 	services.displayManager.ly.enable = true;
