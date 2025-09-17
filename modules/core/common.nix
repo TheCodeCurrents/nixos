@@ -3,6 +3,8 @@
 
 {
 
+	system.nixos.label = "NixOS - configuration v0.2.0";
+
 	imports = [
     ./gaming.nix
   ];
