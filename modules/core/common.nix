@@ -3,7 +3,6 @@
 
 {
 
-	boot.loader.systemd.configurationName = "MyCustomBoot";
 
 	imports = [
     ./gaming.nix
