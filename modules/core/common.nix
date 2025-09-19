@@ -18,14 +18,19 @@
 	services.xserver = {
 		enable = true;
 		layout = "de";
+		displayManager.gdm.enable = true;
+		desktopManager.gnome.enable = true;
 		autoRepeatDelay = 200;
 		autoRepeatInterval = 35;
 		windowManager.qtile.enable = true;
 	};
 
-	wayland.windowManager.hyprland = {
-		enable = true;
-	};
+	services.displayManager.gdm.enable = true;
+  services.desktopManager.gnome.enable = true;
+
+  services.gnome.core-apps.enable = false;
+  services.gnome.core-developer-tools.enable = false;
+
 
 	services.displayManager.ly.enable = true;
 	services.xserver.xkb.layout = "de";
