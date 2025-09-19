@@ -33,5 +33,25 @@
                 }
             ];
         };
+        nixosConfigurations.yoga = nixpkgs.lib.nixosSystem {
+            system = "x86_64-Linux";
+            modules = [
+                ./hosts/yoga/configuration.nix
+                home-manager.nixosModules.home-manager
+                {
+                    home-manager = {
+                        useGlobalPkgs = true;
+                        useUserPackages = true;
+                        users.jflocke = {
+                            imports = [
+                                ./modules/users/jflocke/home.nix
+                                catppuccin.homeManagerModules.catppuccin
+                          ];
+                        };
+                        backupFileExtension = "backup";
+                    };
+                }
+            ];
+        };
     };
 }

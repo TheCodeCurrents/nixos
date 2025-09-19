@@ -40,6 +40,8 @@
 		pulse.enable = true;
 	};
 
+	console.keyMap = "de";
+
 	nixpkgs.config.allowUnfree = true;
 
 	environment.systemPackages = with pkgs; [
