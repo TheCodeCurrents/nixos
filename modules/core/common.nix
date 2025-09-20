@@ -69,6 +69,10 @@
 		cura-appimage
 
 		nautilus
+		gnomecast
+		gnome-boxes
+		gnome-tweaks
+		
 	];
 
 	fonts.packages = with pkgs; [
