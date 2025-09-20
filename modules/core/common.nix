@@ -25,6 +25,10 @@
 		windowManager.qtile.enable = true;
 	};
 
+	networking.firewall.allowedTCPPorts = [ 3000 ];
+	networking.firewall.allowedUDPPorts = [ 3000 ];
+	networking.firewall.enable = true;
+
 	# services.displayManager.gdm.enable = true;
   # services.desktopManager.gnome.enable = true;
 
@@ -55,6 +59,8 @@
 		htop
 		btop
 		networkmanager
+
+		freecad
 	];
 
 	fonts.packages = with pkgs; [
