@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Gnome Desktop Environment
 - Hyprland Window Manager
 - freecad in common packages
+- cura in common packages
 - added gnome.nix
 
 ### Changed

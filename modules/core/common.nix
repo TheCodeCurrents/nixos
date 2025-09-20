@@ -66,6 +66,7 @@
 		networkmanager
 
 		freecad
+		cura
 	];
 
 	fonts.packages = with pkgs; [
