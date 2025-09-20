@@ -23,7 +23,7 @@ in {
   ];
 
   # Enable catppuccin for GTK
-  gtk.catppuccin.enable = true;
+  catppuccin = gtk.enable = true;
 
   dconf.settings = {
     # GTK Theme - will be set by catppuccin
