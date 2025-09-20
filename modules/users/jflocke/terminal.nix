@@ -37,14 +37,13 @@
     catppuccin.enable = true;
     catppuccin.flavor = "mocha"; # Options: latte, frappe, macchiato, mocha
     
-    programs = {
-        bat.catppuccin. enable = true;
-        starship.catppuccin.enable = true;
-        fish.catppuccin.enable = true;
-        alacritty.catppuccin.enable = true;
-        btop.catppuccin.enable = true;
-        fzf.catppuccin.enable = true;
-        # eza.catppuccin.enable = true;
+    catppuccin = {
+        bat.enable = true;
+        starship.enable = true;
+        fish.enable = true;
+        alacritty.enable = true;
+        btop.enable = true;
+        fzf.enable = true;
     };
 
     # zoxide for smarter cd

@@ -14,6 +14,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Gnome Desktop Environment
 - Hyprland Window Manager
 - freecad in common packages
+- added gnome.nix
+
+### Changed
+
+- pipewire tweaks in common.nix
+
+## Fixed
+
+- fixed obsolete renamed flake attribute
+    -> evaluation warning: Obsolete Flake attribute `catppuccin.homeManagerModules.catppuccin' is used. It was renamed to `catppuccin.homeModules.catppuccin`
+- fixed obsolete renamed catppuccin options
+    -> for example `programs.starship.catppuccin.enable` to `catppuccin.starship.enable`
 
 ## [0.2.0] - 2025-09-17
 

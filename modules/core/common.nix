@@ -39,10 +39,15 @@
 	services.displayManager.ly.enable = true;
 	services.xserver.xkb.layout = "de";
 	services.printing.enable = true;
-	services.pipewire = {
-		enable = true;
-		pulse.enable = true;
-	};
+	# Enable sound with pipewire.
+  services.pulseaudio.enable = false;
+  security.rtkit.enable = true;
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+  };
 
 	console.keyMap = "de";
 

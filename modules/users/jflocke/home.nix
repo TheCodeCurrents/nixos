@@ -6,6 +6,7 @@
     imports = [
         ./terminal.nix
         ./hyprland.nix
+        ./gnome.nix
     ];
 
     programs.git = {

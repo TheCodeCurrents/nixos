@@ -45,7 +45,7 @@
                         users.jflocke = {
                             imports = [
                                 ./modules/users/jflocke/home.nix
-                                catppuccin.homeManagerModules.catppuccin
+                                catppuccin.homeModules.catppuccin
                           ];
                         };
                         backupFileExtension = "backup";
