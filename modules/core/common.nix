@@ -66,7 +66,9 @@
 		networkmanager
 
 		freecad
-		cura
+		cura-appimage
+
+		nautilus
 	];
 
 	fonts.packages = with pkgs; [
