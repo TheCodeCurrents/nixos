@@ -19,6 +19,8 @@
 
     # Starship prompt
     programs.starship = {
+        enableFishIntegration = true;
+        enableBashIntegration = true;
         enable = true;
         # Configuration written to ~/.config/starship.toml
         settings = {
@@ -83,7 +85,7 @@
 
     programs.zellij = {
         enable = true;
-        enableFishIntegration = true;
+        enableFishIntegration = false;
         catppuccin.enable = true;
         settings = {
             simplifiedui = true;

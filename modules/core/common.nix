@@ -72,7 +72,8 @@
 		gnomecast
 		gnome-boxes
 		gnome-tweaks
-		
+
+		cifs-utils
 	];
 
 	fonts.packages = with pkgs; [

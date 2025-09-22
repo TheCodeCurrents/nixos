@@ -32,4 +32,3 @@
   programs.firefox.enable = true;
 
 }
-
