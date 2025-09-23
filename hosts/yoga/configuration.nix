@@ -5,6 +5,7 @@
     [
       ../../modules/core/common.nix
       ./hardware-configuration.nix
+      ./wireguard.nix
     ];
 
   hardware.graphics = {
