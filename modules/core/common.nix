@@ -6,6 +6,7 @@
 
 	imports = [
     ./gaming.nix
+		./virtualization.nix
   ];
 
 	boot.loader.systemd-boot.enable = true;
