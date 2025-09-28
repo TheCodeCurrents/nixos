@@ -2,7 +2,7 @@
 {
   
   virtualisation.libvirtd.enable = true;
-  users.users.jflocke.extraGroups = [ "libvirtd" ];
+  users.users.jflocke.extraGroups = [ "libvirtd" "user-with-access-to-virtualbox" ];
 
   programs.virt-manager.enable = true;
   environment.systemPackages = with pkgs; [

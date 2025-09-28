@@ -19,6 +19,13 @@
     };
 
     home.packages = with pkgs; [
+        pkgs.jellyfin
+        pkgs.jellyfin-web
+        pkgs.jellyfin-ffmpeg
+
+        aaxtomp3
+
+        logisim-evolution
     ];
 
     home.stateVersion = "25.05";
