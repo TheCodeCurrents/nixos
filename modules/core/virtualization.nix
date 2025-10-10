@@ -1,13 +1,18 @@
 { config, pkgs, ... }:
 {
+
+  boot.kernelModules = [ "vboxdrv" "vboxnetflt" "vboxnetadp" ];
+
   
   virtualisation.libvirtd.enable = true;
-  users.users.jflocke.extraGroups = [ "libvirtd" "user-with-access-to-virtualbox" ];
+
+  virtualisation.virtualbox.host.enable = true;
+  virtualisation.virtualbox.host.enableExtensionPack = true;
+  users.users.jflocke.extraGroups = [ "libvirtd" "vboxusers" ];
 
   programs.virt-manager.enable = true;
   environment.systemPackages = with pkgs; [
     gnome-boxes
-    virtualbox
     qemu
   ];
 

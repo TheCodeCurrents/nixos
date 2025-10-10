@@ -7,25 +7,28 @@
         ./terminal.nix
         ./hyprland.nix
         ./gnome.nix
+        ./git.nix
     ];
-
-    programs.git = {
-        enable = true;
-        userName  = "Jakob Flocke";
-        userEmail = "jflocke@proton.me";
-        extraConfig = {
-            init.defaultBranch = "main";
-        };
-    };
 
     home.packages = with pkgs; [
         pkgs.jellyfin
         pkgs.jellyfin-web
         pkgs.jellyfin-ffmpeg
 
+        phoronix-test-suite
+
         aaxtomp3
 
         logisim-evolution
+
+        wpsoffice
+        
+        rustc
+        cargo
+
+        ventoy-full-gtk
+        udisks
+
     ];
 
     home.stateVersion = "25.05";

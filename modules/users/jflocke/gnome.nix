@@ -16,6 +16,7 @@ in {
   home.packages = with pkgs; [
     gnome-tweaks
     gnomeExtensions.vitals
+    gnomeExtensions.blur-my-shell
     gnomeExtensions.user-themes
     papirus-icon-theme
     # Add Catppuccin GTK theme
@@ -33,6 +34,16 @@ in {
       color-scheme = "prefer-dark";
     };
 
+    "org/gnome/desktop/background" = {
+      picture-uri = "file:///home/jflocke/nixos/wallpapers/jellyfish.jpg";
+      picture-uri-dark = "file:///home/jflocke/nixos/wallpapers/jellyfish.jpg";
+      picture-options = "zoom";
+    };
+
+    "org/gnome/desktop/screensaver" = {
+      picture-uri = "file:///home/jflocke/nixos/wallpapers/jellyfish.jpg";
+    };
+
     # Shell theme (requires User Themes extension)
     "org/gnome/shell/extensions/user-theme" = {
       name = "catppuccin-mocha-mauve-standard";
@@ -42,8 +53,18 @@ in {
       show-memory = true;
       show-cpu = true;
       show-temperature = true;
-      show-storage = false;
-      show-network = false;
+      show-storage = true;
+      show-network = true;
+      show-gpu = true;
+    };
+
+    "org/gnome/shell/extensions/blur-my-shell" = {
+      show-memory = true;
+      show-cpu = true;
+      show-temperature = true;
+      show-storage = true;
+      show-network = true;
+      show-gpu = true;
     };
 
     # Terminal color scheme (Catppuccin Mocha)
@@ -74,6 +95,7 @@ in {
     "org/gnome/shell" = {
       enabled-extensions = [
         "Vitals@CoreCoding.com"
+        "blur-my-shell@aunetx"
         "user-theme@gnome-shell-extensions.gcampax.github.com"
       ];
     };

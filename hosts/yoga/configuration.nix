@@ -36,18 +36,6 @@
 
   programs.fish.enable = true;
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.jflocke = {
-    isNormalUser = true;
-    shell = pkgs.fish;
-    extraGroups = [ "wheel" "networkmanager" ];
-    packages = with pkgs; [
-      tree
-      networkmanager_dmenu
-      networkmanager
-    ];
-  };
-
   programs.firefox.enable = true;
 
 }
