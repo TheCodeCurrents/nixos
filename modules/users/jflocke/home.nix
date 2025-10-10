@@ -29,6 +29,8 @@
         ventoy-full-gtk
         udisks
 
+        ungoogled-chromium
+        chromium
     ];
 
     home.stateVersion = "25.05";
