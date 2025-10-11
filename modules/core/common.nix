@@ -4,10 +4,10 @@
 {
 
 	imports = [
-    	./gaming.nix
+		./gaming.nix
 		./virtualization.nix
-		# ./docker.nix
-  	];
+		./docker.nix
+	];
 
 	boot.loader.systemd-boot.enable = true;
 	boot.loader.efi.canTouchEfiVariables = true;
@@ -41,7 +41,6 @@
 	services.gnome.core-apps.enable = true;
 	services.gnome.core-developer-tools.enable = true;
 
-
 	services.displayManager.ly.enable = true;
 	services.xserver.xkb.layout = "de";
 	services.printing.enable = true;
@@ -66,6 +65,9 @@
 	programs.appimage = {
 		enable = true;
 	};
+
+	# enable flatpak support
+	services.flatpak.enable = true;
 
 	# Needed for AppImage mounting
 	services.gvfs.enable = true;
@@ -119,6 +121,9 @@
 		freerdp
 
 		protonvpn-gui
+
+		flatpak
+		gnome-software
 	];
 
 	fonts.packages = with pkgs; [

@@ -1,19 +1,16 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, ... }:
+{
+  
+  virtualisation.docker = {
+    enable = true;
+    enableOnBoot = true;
+    package = pkgs.docker;
+  };
+
   environment.systemPackages = with pkgs; [
     docker
     docker-compose
-    docker-buildx
+    appimage-run
   ];
-
-  virtualisation.docker = {
-    enable = true;
-    extraOptions = ''
-      {
-        "data-root": "/var/lib/docker"
-      }
-    '';
-  };
-
-  users.groups.docker.members = [ "jflocke" ];
 
 }
