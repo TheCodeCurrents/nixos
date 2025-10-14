@@ -73,28 +73,28 @@
 	services.gvfs.enable = true;
 	services.udisks2.enable = true;
 
-	programs.nix-ld.enable = true;
+	# programs.nix-ld.enable = true;
 
 	# Add common libraries AppImages need
-	programs.nix-ld.libraries = with pkgs; [
-		stdenv.cc.cc
-		glib
-		zlib
-		libGL
-		libxkbcommon
-		xorg.libX11
-		xorg.libXcursor
-		xorg.libXrandr
-		xorg.libXi
-		xorg.libXext
-		xorg.libXrender
-		xorg.libXfixes
-		xorg.libXcomposite
-		xorg.libXdamage
-		xorg.libXtst
-		xorg.libXxf86vm
-		xorg.libXScrnSaver
-	];
+	# programs.nix-ld.libraries = with pkgs; [
+	# 	stdenv.cc.cc
+	# 	glib
+	# 	zlib
+	# 	libGL
+	# 	libxkbcommon
+	# 	xorg.libX11
+	# 	xorg.libXcursor
+	# 	xorg.libXrandr
+	# 	xorg.libXi
+	# 	xorg.libXext
+	# 	xorg.libXrender
+	# 	xorg.libXfixes
+	# 	xorg.libXcomposite
+	# 	xorg.libXdamage
+	# 	xorg.libXtst
+	# 	xorg.libXxf86vm
+	# 	xorg.libXScrnSaver
+	# ];
 
 	environment.systemPackages = with pkgs; [
 	  vim
@@ -124,6 +124,15 @@
 
 		flatpak
 		gnome-software
+	
+		jre8
+		
+		libxxf86vm
+		libxrandr
+		libxi
+		libxcursor
+		libxinerama
+		libGL
 	];
 
 	fonts.packages = with pkgs; [
