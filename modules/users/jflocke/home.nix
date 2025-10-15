@@ -8,6 +8,7 @@
         ./hyprland.nix
         ./gnome.nix
         ./git.nix
+        ./fpga.nix
     ];
 
     home.packages = with pkgs; [
