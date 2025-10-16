@@ -124,15 +124,8 @@
 
 		flatpak
 		gnome-software
-	
-		jre8
-		
-		libxxf86vm
-		libxrandr
-		libxi
-		libxcursor
-		libxinerama
-		libGL
+
+		obsidian
 	];
 
 	fonts.packages = with pkgs; [
