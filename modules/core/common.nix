@@ -126,6 +126,8 @@
 		gnome-software
 
 		obsidian
+
+		python3
 	];
 
 	fonts.packages = with pkgs; [
