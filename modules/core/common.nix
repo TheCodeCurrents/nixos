@@ -147,6 +147,14 @@
 		];
 	};
 
+
+	programs.hyprland.enable = true;
+
+	xdg.portal = {
+		enable = true;
+		extraPortals = [ pkgs.xdg-desktop-portal-wlr ];
+	};
+
 	nix.settings.experimental-features = [ "nix-command" "flakes" ];
 	system.stateVersion = "25.05";
 }
