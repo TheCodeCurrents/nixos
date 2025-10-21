@@ -24,12 +24,27 @@
 	services.xserver = {
 		enable = true;
 		layout = "de";
+
+		# You can still use GDM if you want to switch between GNOME and Qtile
 		# displayManager.gdm.enable = true;
-		desktopManager.gnome.enable = true;
+
+		desktopManager.gnome = {
+			enable = true;
+
+			# Enable fractional scaling in Mutter
+			extraGSettingsOverridePackages = [ pkgs.mutter ];
+			extraGSettingsOverrides = ''
+				[org.gnome.mutter]
+				experimental-features=['scale-monitor-framebuffer']
+			'';
+		};
+
 		autoRepeatDelay = 200;
 		autoRepeatInterval = 35;
+
 		windowManager.qtile.enable = true;
 	};
+
 
 	networking.firewall.allowedTCPPorts = [ 3000 ];
 	networking.firewall.allowedUDPPorts = [ 3000 ];
@@ -55,6 +70,11 @@
 	};
 
 	console.keyMap = "de";
+
+	services.udev.packages = [ 
+    pkgs.platformio-core
+    pkgs.openocd
+  ];
 
 	nixpkgs.config.allowUnfree = true;
 	nixpkgs.config.permittedInsecurePackages = [

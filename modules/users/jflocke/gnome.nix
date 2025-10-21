@@ -27,6 +27,11 @@ in {
   # catppuccin.gtk.enable = true;
 
   dconf.settings = {
+    # Mutter settings (fractional scaling)
+    "org/gnome/mutter" = {
+      experimental-features = [ "scale-monitor-framebuffer" ];
+    };
+
     # GTK Theme - will be set by catppuccin
     "org/gnome/desktop/interface" = {
       gtk-theme = "catppuccin-mocha-mauve-standard";

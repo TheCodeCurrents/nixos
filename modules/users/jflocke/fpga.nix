@@ -4,7 +4,7 @@
 
   home.packages = with pkgs; [
     yosys
-    nextpnr
+    # nextpnr
     # nextpnrWithGui
     openfpgaloader
     verilator
