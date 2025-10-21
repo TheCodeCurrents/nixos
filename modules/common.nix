@@ -146,6 +146,8 @@
 		gnome-software
 
 		obsidian
+
+		python3
 	];
 
 	fonts.packages = with pkgs; [
@@ -163,6 +165,14 @@
 			networkmanager_dmenu
 			networkmanager
 		];
+	};
+
+
+	programs.hyprland.enable = true;
+
+	xdg.portal = {
+		enable = true;
+		extraPortals = [ pkgs.xdg-desktop-portal-wlr ];
 	};
 
 	nix.settings.experimental-features = [ "nix-command" "flakes" ];

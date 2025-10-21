@@ -26,7 +26,7 @@
                         useUserPackages = true;
                         users.jflocke = {
                             imports = [
-                                ./modules/users/jflocke/home.nix
+                                ./users/jflocke/home.nix
                                 catppuccin.homeManagerModules.catppuccin
                           ];
                         };
