@@ -30,13 +30,6 @@
 
 		desktopManager.gnome = {
 			enable = true;
-
-			# Enable fractional scaling in Mutter
-			extraGSettingsOverridePackages = [ pkgs.mutter ];
-			extraGSettingsOverrides = ''
-				[org.gnome.mutter]
-				experimental-features=['scale-monitor-framebuffer']
-			'';
 		};
 
 		autoRepeatDelay = 200;

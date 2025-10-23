@@ -46,7 +46,7 @@
                         useUserPackages = true;
                         users.jflocke = {
                             imports = [
-                                ./modules/users/jflocke/home.nix
+                                ./users/jflocke/home.nix
                                 catppuccin.homeModules.catppuccin
                           ];
                         };
@@ -66,7 +66,7 @@
                         useUserPackages = true;
                         users.jflocke = {
                             imports = [
-                                ./modules/users/jflocke/home.nix
+                                ./users/jflocke/home.nix
                                 catppuccin.homeModules.catppuccin
                           ];
                         };

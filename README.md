@@ -53,7 +53,7 @@ TODO.md
 
 ## Multi-Device & Multi-User
 - Each device has its own config in `hosts/<device>/configuration.nix`.
-- Users are managed via `modules/users/<username>/home.nix` using home-manager.
+- Users are managed via `users/<username>/home.nix` using home-manager.
 - Add new devices/users by creating new folders/files and referencing them in `flake.nix`.
 
 ## Productivity Stack
@@ -70,7 +70,7 @@ TODO.md
 - **Lockscreen, Login, and Boot**: Custom plymouth, SDDM/GDM themes.
 
 ## Dev Environments
-- **devenv**: Define per-user, per-project devshells in `modules/users/<username>/devshells.nix`.
+- **devenv**: Define per-user, per-project devshells in `users/<username>/devshells.nix`.
 - **Supported stacks**: Bevy (Rust game engine), Svelte (JS framework), and more.
 - **Automatic setup**: Enter a project folder and run `nix develop` for instant environment.
 

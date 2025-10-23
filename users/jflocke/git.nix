@@ -11,7 +11,6 @@
       credential.helper = "${
           pkgs.git.override { withLibsecret = true; }
         }/bin/git-credential-libsecret";
-      pull.rebase = "false";
     };
   };
   
