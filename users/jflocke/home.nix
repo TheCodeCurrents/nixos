@@ -8,9 +8,15 @@
         ./hyprland.nix
         ./gnome.nix
         ./git.nix
-        ./nixvim.nix
+        # ./nixvim.nix
         # ./fpga.nix
     ];
+
+    programs.nixvim = {
+        enable = true;
+        colorschemes.catppuccin.enable = true;
+        plugins.lualine.enable = true;
+    };
 
     home.packages = with pkgs; [
         pkgs.jellyfin

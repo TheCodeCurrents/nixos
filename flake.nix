@@ -6,14 +6,17 @@
             url = "github:nix-community/home-manager";
             inputs.nixpkgs.follows = "nixpkgs";
         };
-        nixvim.url = "github:nix-community/nixvim";
+        nixvim = {
+            url = "github:nix-community/nixvim";
+            inputs.nixpkgs.follows = "nixpkgs";
+        };
         catppuccin = {
             url = "github:catppuccin/nix";
             inputs.nixpkgs.follows = "nixpkgs";
         };
     };
 
-    outputs = { self, nixpkgs, catppuccin, home-manager, ... }: {
+    outputs = { self, nixpkgs, catppuccin, home-manager, nixvim, ... }: {
         nixosConfigurations.ideapad = nixpkgs.lib.nixosSystem {
             system = "x86_64-Linux";
             modules = [
@@ -25,8 +28,9 @@
                         useUserPackages = true;
                         users.jflocke = {
                             imports = [
-                                ./users/jflocke/home.nix
                                 catppuccin.homeManagerModules.catppuccin
+                                nixvim.homeManagerModules.nixvim
+                                ./users/jflocke/home.nix
                           ];
                         };
                         backupFileExtension = "backup";
@@ -45,8 +49,9 @@
                         useUserPackages = true;
                         users.jflocke = {
                             imports = [
+                                catppuccin.homeManagerModules.catppuccin
+                                nixvim.homeManagerModules.nixvim
                                 ./users/jflocke/home.nix
-                                catppuccin.homeModules.catppuccin
                           ];
                         };
                         backupFileExtension = "backup";
@@ -65,8 +70,9 @@
                         useUserPackages = true;
                         users.jflocke = {
                             imports = [
+                                catppuccin.homeManagerModules.catppuccin
+                                nixvim.homeManagerModules.nixvim
                                 ./users/jflocke/home.nix
-                                catppuccin.homeModules.catppuccin
                           ];
                         };
                         backupFileExtension = "backup";
