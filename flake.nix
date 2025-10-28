@@ -7,7 +7,6 @@
             inputs.nixpkgs.follows = "nixpkgs";
         };
         nixvim.url = "github:nix-community/nixvim";
-        nixvimpre.url = "github:dc-tec/nixvim";
         catppuccin = {
             url = "github:catppuccin/nix";
             inputs.nixpkgs.follows = "nixpkgs";

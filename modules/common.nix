@@ -112,7 +112,6 @@
 	environment.systemPackages = with pkgs; [
 	  vim
 		vscode
-		neovim
 		wget
 		git
 		alacritty

@@ -8,6 +8,7 @@
         ./hyprland.nix
         ./gnome.nix
         ./git.nix
+        ./nixvim.nix
         # ./fpga.nix
     ];
 

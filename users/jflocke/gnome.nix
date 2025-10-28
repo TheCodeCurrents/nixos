@@ -1,54 +1,26 @@
 { config, pkgs, ... }:
 
-let
-  # Use Catppuccin colors instead of custom palette
-  catppuccinPalette = [
-    "#45475A" "#F38BA8" "#A6E3A1" "#F9E2AF"
-    "#89B4FA" "#F5C2E7" "#94E2D5" "#BAC2DE"
-    "#585B70" "#F38BA8" "#A6E3A1" "#F9E2AF"
-    "#89B4FA" "#F5C2E7" "#94E2D5" "#A6ADC8"
-  ];
-in {
-  # Enable catppuccin
-  catppuccin.enable = true;
-  catppuccin.flavor = "mocha";
-
+{
   home.packages = with pkgs; [
     gnome-tweaks
     gnomeExtensions.vitals
     gnomeExtensions.blur-my-shell
-    gnomeExtensions.user-themes
-    papirus-icon-theme
-    # Add Catppuccin GTK theme
-    catppuccin-gtk
+    # gnomeExtensions.user-themes
   ];
 
   dconf.settings = {
-    # Mutter settings (fractional scaling)
-    # "org/gnome/mutter" = {
-    #   experimental-features = [ "scale-monitor-framebuffer" ];
-    # };
-
-    # GTK Theme - will be set by catppuccin
-    "org/gnome/desktop/interface" = {
-      gtk-theme = "catppuccin-mocha-mauve-standard";
-      icon-theme = "Papirus-Dark";
-      color-scheme = "prefer-dark";
-    };
-
     "org/gnome/desktop/background" = {
       picture-uri = "file:///home/jflocke/nixos/wallpapers/jellyfish.jpg";
       picture-uri-dark = "file:///home/jflocke/nixos/wallpapers/jellyfish.jpg";
       picture-options = "zoom";
     };
 
-    "org/gnome/desktop/screensaver" = {
-      picture-uri = "file:///home/jflocke/nixos/wallpapers/jellyfish.jpg";
+    "org/gnome/desktop/interface" = {
+      color-scheme = "prefer-dark";
     };
 
-    # Shell theme (requires User Themes extension)
-    "org/gnome/shell/extensions/user-theme" = {
-      name = "catppuccin-mocha-mauve-standard";
+    "org/gnome/desktop/screensaver" = {
+      picture-uri = "file:///home/jflocke/nixos/wallpapers/jellyfish.jpg";
     };
 
     "org/gnome/shell/extensions/vitals" = {
@@ -69,15 +41,6 @@ in {
       show-gpu = true;
     };
 
-    # Terminal color scheme (Catppuccin Mocha)
-    "org/gnome/terminal/legacy/profiles:/:<PROFILE_ID>" = {
-      visible-name = "Catppuccin Mocha";
-      use-theme-colors = false;
-      background-color = "'#1E1E2E'";
-      foreground-color = "'#CDD6F4'";
-      palette = catppuccinPalette;
-    };
-
     "org/gnome/desktop/wm/keybindings" = {
       switch-applications = ["<Super>Tab"];
       switch-applications-backward = ["<Shift><Super>Tab"];
@@ -93,12 +56,10 @@ in {
       move-to-workspace-4 = ["<Shift><Super>4"];
     };
 
-    # Enable extensions
     "org/gnome/shell" = {
       enabled-extensions = [
         "Vitals@CoreCoding.com"
         "blur-my-shell@aunetx"
-        "user-theme@gnome-shell-extensions.gcampax.github.com"
       ];
     };
   };
