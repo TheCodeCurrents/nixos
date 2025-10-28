@@ -36,7 +36,6 @@
       bind = SUPER, F11, exec, pactl set-sink-volume @DEFAULT_SINK@ -5%
       bind = SUPER, F12, exec, pactl set-sink-volume @DEFAULT_SINK@ +5%
 
-
       # Start hyprpaper on launch
       exec-once = hyprpaper
     '';

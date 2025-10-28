@@ -72,7 +72,7 @@ in {
       show-gpu = true;
     };
 
-    # Terminal color scheme (Catppuccin Mocha)
+    Terminal color scheme (Catppuccin Mocha)
     "org/gnome/terminal/legacy/profiles:/:<PROFILE_ID>" = {
       visible-name = "Catppuccin Mocha";
       use-theme-colors = false;
