@@ -29,6 +29,8 @@
 
         ventoy-full-gtk
         udisks
+
+        onlyoffice-desktopeditors
     ];
 
     home.stateVersion = "25.05";
