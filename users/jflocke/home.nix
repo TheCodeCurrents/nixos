@@ -6,7 +6,7 @@
     imports = [
         ./terminal.nix
         ./hyprland.nix
-        # ./gnome.nix
+        ./gnome.nix
         ./git.nix
         # ./fpga.nix
     ];

@@ -10,46 +10,93 @@
       flavour = "mocha"; # latte, frappe, macchiato, mocha
     };
 
-    # Syntax highlighting
+    # Treesitter for syntax highlighting
     plugins.treesitter = {
       enable = true;
-      ensureInstalled = [ "lua" "nix" "python" "rust" "javascript" "typescript" "html" "css" "json" "yaml" "toml" "markdown"];
+      ensureInstalled = [
+        "lua" "nix" "python" "rust" "javascript" "typescript"
+        "html" "css" "json" "yaml" "toml" "markdown"
+        "c" "cpp" "verilog" "bash"
+      ];
     };
 
     # Markdown preview
-    markdown-preview = {
-      enable = true;
-    };
+    markdown-preview.enable = true;
 
     # Statusline
     plugins.lualine.enable = true;
 
+    # File explorer + fuzzy finder
+    plugins.nvim-tree.enable = true;
+    plugins.telescope.enable = true;
+    plugins.nvim-web-devicons.enable = true;
+
     # Autocompletion
     plugins.nvim-cmp = {
       enable = true;
-      sources = [ "nvim_lsp" "buffer" "path" ];
+      sources = [ "nvim_lsp" "buffer" "path" "luasnip" ];
     };
+    plugins.luasnip.enable = true;
 
-    # LSP
+    # LSP servers
     plugins.lsp = {
       enable = true;
       servers = {
         lua_ls.enable = true;
         rust_analyzer.enable = true;
         pyright.enable = true;
+        clangd.enable = true;       # C/C++
+        verible.enable = true;      # Verilog/SystemVerilog
+        tsserver.enable = true;     # JS/TS
+        html.enable = true;
+        cssls.enable = true;
+        jsonls.enable = true;
+        yamlls.enable = true;
       };
     };
 
-    # Extra Lua config if needed
+    # Debugging (DAP)
+    plugins.nvim-dap.enable = true;
+    plugins.nvim-dap-ui.enable = true;
+
+    # Git integration
+    plugins.gitsigns.enable = true;
+
+    # Quality of life
+    plugins.comment.enable = true;       # `gc` to comment
+    plugins.which-key.enable = true;     # keybinding hints
+    plugins.autopairs.enable = true;     # auto close brackets/quotes
+    plugins.bufferline.enable = true;    # tab-like bufferline
+    plugins.toggleterm.enable = true;    # integrated terminal
+
+    # Extra Lua config
     extraConfigLua = ''
+      -- UI
       vim.opt.number = true
       vim.opt.relativenumber = true
       vim.opt.termguicolors = true
 
-      vim.opt.tabstop = 4        -- number of spaces a <Tab> counts for
-      vim.opt.shiftwidth = 4     -- spaces for autoindent
-      vim.opt.expandtab = true   -- convert tabs to spaces
-      vim.opt.smartindent = true -- smart autoindenting
+      -- Indentation
+      vim.opt.tabstop = 4
+      vim.opt.shiftwidth = 4
+      vim.opt.expandtab = true
+      vim.opt.smartindent = true
+
+      -- Search
+      vim.opt.ignorecase = true
+      vim.opt.smartcase = true
+
+      -- Clipboard
+      vim.opt.clipboard = "unnamedplus"
+
+      -- Telescope keymaps
+      vim.keymap.set("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { desc = "Find files" })
+      vim.keymap.set("n", "<leader>fg", "<cmd>Telescope live_grep<cr>", { desc = "Live grep" })
+      vim.keymap.set("n", "<leader>fb", "<cmd>Telescope buffers<cr>", { desc = "Buffers" })
+      vim.keymap.set("n", "<leader>fh", "<cmd>Telescope help_tags<cr>", { desc = "Help tags" })
+
+      -- Nvim-tree toggle
+      vim.keymap.set("n", "<leader>e", "<cmd>NvimTreeToggle<cr>", { desc = "File Explorer" })
     '';
   };
 }

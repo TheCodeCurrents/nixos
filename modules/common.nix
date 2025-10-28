@@ -141,6 +141,10 @@
 		obsidian
 
 		python3
+		javaPackages.compiler.temurin-bin.jre-8
+		javaPackages.compiler.temurin-bin.jdk-21
+		javaPackages.compiler.temurin-bin.jdk-23
+		javaPackages.compiler.temurin-bin.jdk-25
 	];
 
 	fonts.packages = with pkgs; [

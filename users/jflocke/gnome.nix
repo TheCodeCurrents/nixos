@@ -23,9 +23,6 @@ in {
     catppuccin-gtk
   ];
 
-  # Enable catppuccin for GTK
-  # catppuccin.gtk.enable = true;
-
   dconf.settings = {
     # Mutter settings (fractional scaling)
     # "org/gnome/mutter" = {
@@ -72,7 +69,7 @@ in {
       show-gpu = true;
     };
 
-    Terminal color scheme (Catppuccin Mocha)
+    # Terminal color scheme (Catppuccin Mocha)
     "org/gnome/terminal/legacy/profiles:/:<PROFILE_ID>" = {
       visible-name = "Catppuccin Mocha";
       use-theme-colors = false;
