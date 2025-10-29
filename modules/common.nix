@@ -23,14 +23,10 @@
 
 	services.xserver = {
 		enable = true;
-		layout = "de";
+		xkb.layout = "de";
 
 		# You can still use GDM if you want to switch between GNOME and Qtile
 		# displayManager.gdm.enable = true;
-
-		desktopManager.gnome = {
-			enable = true;
-		};
 
 		autoRepeatDelay = 200;
 		autoRepeatInterval = 35;
@@ -38,19 +34,19 @@
 		windowManager.qtile.enable = true;
 	};
 
+	services.desktopManager.gnome = {
+		enable = true;
+	};
+
 
 	networking.firewall.allowedTCPPorts = [ 3000 ];
 	networking.firewall.allowedUDPPorts = [ 3000 ];
 	networking.firewall.enable = true;
 
-	# services.displayManager.gdm.enable = true;
-	# services.desktopManager.gnome.enable = true;
-
 	services.gnome.core-apps.enable = true;
 	services.gnome.core-developer-tools.enable = true;
 
 	services.displayManager.ly.enable = true;
-	services.xserver.xkb.layout = "de";
 	services.printing.enable = true;
 	# Enable sound with pipewire.
 	services.pulseaudio.enable = false;

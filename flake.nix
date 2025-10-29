@@ -28,8 +28,8 @@
                         useUserPackages = true;
                         users.jflocke = {
                             imports = [
-                                catppuccin.homeManagerModules.catppuccin
-                                nixvim.homeManagerModules.nixvim
+                                catppuccin.homeModules.catppuccin
+                                nixvim.homeModules.nixvim
                                 ./users/jflocke/home.nix
                           ];
                         };
@@ -49,8 +49,8 @@
                         useUserPackages = true;
                         users.jflocke = {
                             imports = [
-                                catppuccin.homeManagerModules.catppuccin
-                                nixvim.homeManagerModules.nixvim
+                                catppuccin.homeModules.catppuccin
+                                nixvim.homeModules.nixvim
                                 ./users/jflocke/home.nix
                           ];
                         };
@@ -70,8 +70,8 @@
                         useUserPackages = true;
                         users.jflocke = {
                             imports = [
-                                catppuccin.homeManagerModules.catppuccin
-                                nixvim.homeManagerModules.nixvim
+                                catppuccin.homeModules.catppuccin
+                                nixvim.homeModules.nixvim
                                 ./users/jflocke/home.nix
                           ];
                         };

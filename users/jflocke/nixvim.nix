@@ -58,10 +58,12 @@
       servers = {
         lua_ls.enable = true;
         rust_analyzer.enable = true;
+        rust_analyzer.installCargo = true;
+        rust_analyzer.installRustc = true;
         pyright.enable = true;
         clangd.enable = true;       # C/C++
         verible.enable = true;      # Verilog/SystemVerilog
-        tsserver.enable = true;     # JS/TS
+        ts_ls.enable = true;     # JS/TS
         html.enable = true;
         cssls.enable = true;
         jsonls.enable = true;

@@ -3,9 +3,11 @@
 {
   programs.git = {
     enable = true;
-    userName  = "Jakob Flocke";
-    userEmail = "jflocke@proton.me";
-    extraConfig = {
+    settings = {
+      user = {
+        email = "jflocke@proton.me";
+        name = "Jakob Flocke";
+      };
       pull.rebase = false;
       init.defaultBranch = "main";
       credential.helper = "${

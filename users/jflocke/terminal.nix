@@ -46,6 +46,7 @@
         alacritty.enable = true;
         btop.enable = true;
         fzf.enable = true;
+        zellij.enable = true;
     };
 
     # zoxide for smarter cd
@@ -86,7 +87,6 @@
     programs.zellij = {
         enable = true;
         enableFishIntegration = false;
-        catppuccin.enable = true;
         settings = {
             simplifiedui = true;
             show_startup_tips = false;
