@@ -8,7 +8,7 @@
         ./hyprland.nix
         ./gnome.nix
         ./git.nix
-        # ./nixvim.nix
+        ./nixvim.nix
         # ./fpga.nix
     ];
 
@@ -33,6 +33,8 @@
         
         rustc
         cargo
+
+        gcc
 
         ventoy-full-gtk
         udisks

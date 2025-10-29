@@ -7,36 +7,50 @@
     # Theme
     colorschemes.catppuccin = {
       enable = true;
-      flavour = "mocha"; # latte, frappe, macchiato, mocha
+      # flavour = "mocha"; # latte, frappe, macchiato, mocha
     };
 
     # Treesitter for syntax highlighting
     plugins.treesitter = {
       enable = true;
-      ensureInstalled = [
-        "lua" "nix" "python" "rust" "javascript" "typescript"
-        "html" "css" "json" "yaml" "toml" "markdown"
-        "c" "cpp" "verilog" "bash"
-      ];
+      settings = {
+        ensure_installed = [
+          "lua" "nix" "python" "rust" "javascript" "typescript"
+          "html" "css" "json" "yaml" "toml" "markdown"
+          "c" "cpp" "verilog" "bash"
+        ];
+      };
     };
 
+
     # Markdown preview
-    markdown-preview.enable = true;
+    plugins.markdown-preview.enable = true;
 
     # Statusline
-    plugins.lualine.enable = true;
+    # plugins.lualine.enable = true;
 
     # File explorer + fuzzy finder
     plugins.nvim-tree.enable = true;
     plugins.telescope.enable = true;
-    plugins.nvim-web-devicons.enable = true;
+    plugins.web-devicons.enable = true;
 
     # Autocompletion
-    plugins.nvim-cmp = {
-      enable = true;
-      sources = [ "nvim_lsp" "buffer" "path" "luasnip" ];
+    plugins = {
+      cmp = {
+        enable = true;
+        autoEnableSources = false;
+        settings.sources = [
+          { name = "nvim_lsp"; }
+          { name = "path"; }
+          { name = "buffer"; }
+        ];
+      };
+      cmp-nvim-lsp.enable = true;
+      cmp-path.enable = true;
+      cmp-buffer.enable = true;
     };
     plugins.luasnip.enable = true;
+    plugins.glow.enable = true;
 
     # LSP servers
     plugins.lsp = {
@@ -56,8 +70,8 @@
     };
 
     # Debugging (DAP)
-    plugins.nvim-dap.enable = true;
-    plugins.nvim-dap-ui.enable = true;
+    plugins.dap.enable = true;
+    plugins.dap-ui.enable = true;
 
     # Git integration
     plugins.gitsigns.enable = true;
@@ -65,9 +79,11 @@
     # Quality of life
     plugins.comment.enable = true;       # `gc` to comment
     plugins.which-key.enable = true;     # keybinding hints
-    plugins.autopairs.enable = true;     # auto close brackets/quotes
+    plugins.nvim-autopairs.enable = true;     # auto close brackets/quotes
     plugins.bufferline.enable = true;    # tab-like bufferline
     plugins.toggleterm.enable = true;    # integrated terminal
+
+    globals.mapleader = " ";
 
     # Extra Lua config
     extraConfigLua = ''
