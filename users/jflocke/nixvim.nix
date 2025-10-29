@@ -27,7 +27,7 @@
     plugins.markdown-preview.enable = true;
 
     # Statusline
-    # plugins.lualine.enable = true;
+    plugins.lualine.enable = true;
 
     # File explorer + fuzzy finder
     plugins.nvim-tree.enable = true;
