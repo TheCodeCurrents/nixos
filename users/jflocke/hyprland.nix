@@ -41,7 +41,6 @@
 
       input {
         kb_layout = de
-        kb_variant =
         kb_model = pc105
         kb_options = caps:swapescape
         kb_rules = evdev
