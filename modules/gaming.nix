@@ -12,7 +12,7 @@
 
   environment.systemPackages = with pkgs; [
     steam
-    prismlauncher-unwrapped
+    prismlauncher
     lutris-unwrapped
     heroic-unwrapped
 

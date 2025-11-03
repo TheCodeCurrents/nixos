@@ -135,11 +135,13 @@
 
 		obsidian
 
+		modrinth-app-unwrapped
+
 		python3
-		javaPackages.compiler.temurin-bin.jre-8
+		# javaPackages.compiler.temurin-bin.jre-8
 		javaPackages.compiler.temurin-bin.jdk-21
-		javaPackages.compiler.temurin-bin.jdk-23
-		javaPackages.compiler.temurin-bin.jdk-25
+		# javaPackages.compiler.temurin-bin.jre-23
+		# javaPackages.compiler.temurin-bin.jre-25
 	];
 
 	fonts.packages = with pkgs; [

@@ -23,6 +23,13 @@
   };
   services.xserver.videoDrivers = ["nvidia"];
 
+  environment.systemPackages = with pkgs; [
+    libglvnd
+    glfw
+    nvidia-vaapi-driver
+  ];
+
+
   # Enable networking
   networking.networkmanager.enable = true;
 
