@@ -60,9 +60,9 @@
 
 	console.keyMap = "de";
 
-	services.udev.packages = [ 
-    pkgs.platformio-core
-    pkgs.openocd
+	services.udev.packages = with pkgs; [ 
+    platformio-core.udev
+    openocd
   ];
 
 	nixpkgs.config.allowUnfree = true;
