@@ -45,6 +45,11 @@
         onlyoffice-desktopeditors
         
         winboat
+        (ripes.overrideAttrs (old: {
+            cmakeFlags = (old.cmakeFlags or []) ++ [
+                "-DCMAKE_POLICY_VERSION_MINIMUM=3.5"
+            ];
+        }))
     ];
 
     programs.vscode = {
