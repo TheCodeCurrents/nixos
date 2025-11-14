@@ -45,5 +45,23 @@
         onlyoffice-desktopeditors
     ];
 
+    programs.vscode = {
+        enable = true;
+        extensions = with pkgs.vscode-extensions; [
+            dracula-theme.theme-dracula
+            vscodevim.vim
+            yzhang.markdown-all-in-one
+            ms-vscode.cpptools
+            github.copilot
+            github.copilot-chat
+            platformio.platformio-vscode-ide
+            pinage404.nix-extension-pack
+            mkhl.direnv
+            catppuccin.catppuccin-vsc
+            catppuccin.catppuccin-vsc-icons
+            rust-lang.rust-analyzer
+        ];
+    };
+
     home.stateVersion = "25.05";
 }
