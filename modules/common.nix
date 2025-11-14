@@ -108,6 +108,7 @@
 	environment.systemPackages = with pkgs; [
 	  vim
 		vscode
+		vscode.fhs
 		wget
 		git
 		alacritty
