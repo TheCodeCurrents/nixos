@@ -43,6 +43,8 @@
         udisks
 
         onlyoffice-desktopeditors
+        
+        winboat
     ];
 
     programs.vscode = {
