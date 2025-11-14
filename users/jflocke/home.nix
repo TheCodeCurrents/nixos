@@ -43,7 +43,7 @@
         udisks
 
         onlyoffice-desktopeditors
-        
+
         winboat
         (ripes.overrideAttrs (old: {
             cmakeFlags = (old.cmakeFlags or []) ++ [

@@ -136,8 +136,6 @@
 
 		obsidian
 
-		modrinth-app-unwrapped
-
 		python3
 		# javaPackages.compiler.temurin-bin.jre-8
 		javaPackages.compiler.temurin-bin.jdk-21
