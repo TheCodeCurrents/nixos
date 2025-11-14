@@ -55,7 +55,9 @@
             github.copilot
             github.copilot-chat
             platformio.platformio-vscode-ide
-            pinage404.nix-extension-pack
+            bbenoist.nix
+            arrterian.nix-env-selector
+            jnoortheen.nix-ide
             mkhl.direnv
             catppuccin.catppuccin-vsc
             catppuccin.catppuccin-vsc-icons
