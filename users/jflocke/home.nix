@@ -36,6 +36,9 @@
 
         gcc
 
+        platformio
+        cargo-pio
+
         ventoy-full-gtk
         udisks
 
