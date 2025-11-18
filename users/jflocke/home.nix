@@ -33,6 +33,9 @@
         
         rustc
         cargo
+        probe-rs-tools
+        esp-generate
+        espflash
 
         gcc
 
