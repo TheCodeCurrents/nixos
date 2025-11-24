@@ -19,13 +19,6 @@
     };
 
     home.packages = with pkgs; [
-        pkgs.jellyfin
-        pkgs.jellyfin-web
-        pkgs.jellyfin-ffmpeg
-
-        phoronix-test-suite
-
-        aaxtomp3
 
         logisim-evolution
 
