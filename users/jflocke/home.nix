@@ -30,11 +30,17 @@
         logisim-evolution
 
         wpsoffice
+        davinci-resolve
+        gimp
         
         rustc
         cargo
+        esp-generate
 
         gcc
+
+        nodejs_22
+        pnpm
 
         platformio
         cargo-pio
@@ -43,8 +49,10 @@
         udisks
 
         onlyoffice-desktopeditors
+
+        qbittorrent-enhanced
         
-        winboat
+        # winboat
         (ripes.overrideAttrs (old: {
             cmakeFlags = (old.cmakeFlags or []) ++ [
                 "-DCMAKE_POLICY_VERSION_MINIMUM=3.5"
@@ -54,8 +62,11 @@
 
     programs.vscode = {
         enable = true;
-        package = pkgs.vscode.fhsWithPackages (ps: with ps; [ rustup zlib openssl.dev pkg-config avrdude ]);
+        package = pkgs.vscode.fhsWithPackages (ps: with ps; [
+            rustup zlib openssl.dev pkg-config avrdude
+        ]);
     };
+
 
     home.stateVersion = "25.05";
 }
