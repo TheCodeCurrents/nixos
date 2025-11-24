@@ -5,7 +5,7 @@
     gnome-tweaks
     gnomeExtensions.vitals
     gnomeExtensions.blur-my-shell
-    # gnomeExtensions.user-themes
+    gnomeExtensions.user-themes
   ];
 
   dconf.settings = {
@@ -16,6 +16,7 @@
         "Vitals@CoreCoding.com"
         "blur-my-shell@aunetx"
         "gsconnect@andyholmes.github.io"
+        "user-theme@gnome-shell-extensions.gcampax.github.com"
       ];
       favorite-apps = ["firefox.desktop" "alacritty.desktop" "org.gnome.Nautilus.desktop" "code.desktop"];
     };
@@ -62,9 +63,14 @@
       enable-hot-corners = false;
       font-antialiasing = "grayscale";
       font-hinting = "slight";
-      gtk-theme = "Nordic";
+      gtk-theme = "Adwaita-dark";
       toolkit-accessibility = true;
     };
+
+    "org/gnome/shell/extensions/user-theme" = {
+      name = "Adwaita-dark";
+    };
+
 
     "org/gnome/desktop/wm/preferences" = {
       # button-layout = "close,minimize,maximize:appmenu";
