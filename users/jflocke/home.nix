@@ -36,6 +36,8 @@
         rustc
         cargo
         esp-generate
+        
+        typst
 
         gcc
 
