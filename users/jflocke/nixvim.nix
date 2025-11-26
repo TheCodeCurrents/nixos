@@ -17,10 +17,12 @@
         ensure_installed = [
           "lua" "nix" "python" "rust" "javascript" "typescript"
           "html" "css" "json" "yaml" "toml" "markdown"
-          "c" "cpp" "verilog" "bash"
+          "c" "cpp" "verilog" "bash" "typst"
         ];
       };
     };
+
+    plugins.typst-preview.enable = true;
 
 
     # Markdown preview
