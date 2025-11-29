@@ -143,10 +143,19 @@
 		# javaPackages.compiler.temurin-bin.jre-25
 	];
 
-	fonts.packages = with pkgs; [
-		nerd-fonts.jetbrains-mono
-	];
-	
+	fonts = {
+		fontDir.enable = true;
+		packages = with pkgs; [
+			noto-fonts
+			liberation_ttf
+			corefonts
+			vistafonts
+      nerd-fonts.jetbrains-mono
+      nerd-fonts.fira-code
+      nerd-fonts.hack
+      nerd-fonts.dejavu-sans-mono
+		];
+	};	
 
 	# Define a user account. Don't forget to set a password with ‘passwd’.
 	users.users.jflocke = {
