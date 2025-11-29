@@ -149,11 +149,11 @@
 			noto-fonts
 			liberation_ttf
 			corefonts
-			vistafonts
-      nerd-fonts.jetbrains-mono
-      nerd-fonts.fira-code
-      nerd-fonts.hack
-      nerd-fonts.dejavu-sans-mono
+			vista-fonts
+			nerd-fonts.jetbrains-mono
+			nerd-fonts.fira-code
+			nerd-fonts.hack
+			nerd-fonts.dejavu-sans-mono
 		];
 	};	
 
