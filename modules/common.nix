@@ -149,7 +149,7 @@
 			noto-fonts
 			liberation_ttf
 			corefonts
-			vistafonts
+			vista-fonts
       nerd-fonts.jetbrains-mono
       nerd-fonts.fira-code
       nerd-fonts.hack
