@@ -21,6 +21,7 @@
     home.packages = with pkgs; [
 
         logisim-evolution
+        spotify
 
         wpsoffice
         davinci-resolve
