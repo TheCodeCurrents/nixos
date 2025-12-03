@@ -30,6 +30,8 @@
         rustc
         cargo
         esp-generate
+
+        zig
         
         typst
 
