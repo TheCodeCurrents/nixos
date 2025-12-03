@@ -150,7 +150,6 @@
 			liberation_ttf
 			corefonts
 			vista-fonts
-<<<<<<< HEAD
 			nerd-fonts.jetbrains-mono
 			nerd-fonts.fira-code
 			nerd-fonts.hack
