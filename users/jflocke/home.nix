@@ -6,6 +6,7 @@
     imports = [
         ./terminal.nix
         ./hyprland.nix
+        # ./niri.nix
         ./gnome.nix
         ./git.nix
         ./nixvim.nix
@@ -47,6 +48,9 @@
         udisks
 
         onlyoffice-desktopeditors
+
+        foot
+        fuzzel
 
         # winboat
         
