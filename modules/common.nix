@@ -7,6 +7,7 @@
 		./gaming.nix
 		./virtualization.nix
 		./docker.nix
+		./syncthing.nix
 	];
 
 	boot.loader.systemd-boot.enable = true;
