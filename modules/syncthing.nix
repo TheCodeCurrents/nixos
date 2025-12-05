@@ -18,9 +18,7 @@ let
       yoga = { id = yogaId; };
       onyx = { id = onyxId; };
     };
-
-  # Optional: if you want a shared folder between them, you can
-  # also make the folder's device list conditional:
+    
   folderDevices =
     if host == "onyx" then [ "yoga" ]
     else if host == "yoga" then [ "onyx" ]
@@ -44,6 +42,10 @@ in
       folders = {
         "shared" = {
           path = "/home/jflocke/syncthing/shared";
+          devices = folderDevices;
+        };
+        "docs" = {
+          path = "/home/jflocke/Docs";
           devices = folderDevices;
         };
       };
