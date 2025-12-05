@@ -133,7 +133,8 @@
 
 		flatpak
 		gnome-software
-
+		syncthing
+		
 		obsidian
 
 		python3
