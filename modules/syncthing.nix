@@ -3,8 +3,8 @@
 let
   host = config.networking.hostName;
 
-  yogaId = "yoga-id"; # placeholder
-  onyxId = "MOLWIGA-LTJYPSJ-F4TCCJW-5AZQXHN-WF4USGP-KQHC35G-TB67PTM-XDOSUQT"; # placeholder
+  yogaId = "FHJ4CRS-AT3NHXY-CS4QCEH-TT6QKW2-TESB25L-UGHTPTQ-4QPEV75-ILSD3AB";
+  onyxId = "MOLWIGA-LTJYPSJ-F4TCCJW-5AZQXHN-WF4USGP-KQHC35G-TB67PTM-XDOSUQT";
 
   devices =
     if host == "onyx" then {
