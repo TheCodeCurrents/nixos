@@ -51,7 +51,7 @@
         foot
         fuzzel
 
-        # winboat
+        winboat
         
         (ripes.overrideAttrs (old: {
             cmakeFlags = (old.cmakeFlags or []) ++ [
