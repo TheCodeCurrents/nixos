@@ -32,6 +32,8 @@
 		autoRepeatInterval = 35;
 	};
 
+	programs.mango.enable = true;
+
 	services.desktopManager.gnome = {
 		enable = true;
 	};
@@ -105,41 +107,50 @@
 
 	environment.systemPackages = with pkgs; [
 	  vim
-		vscode
-		vscode.fhs
-		wget
-		git
-		alacritty
-		direnv
-		htop
-		btop
-		networkmanager
+    vscode
+    vscode.fhs
+    wget
+    git
+    alacritty
+    direnv
+    htop
+    btop
+    networkmanager
 
-		freecad
-		cura-appimage
+    freecad
+    cura-appimage
 
-		nautilus
-		gnomecast
-		gnome-boxes
-		gnome-tweaks
+    nautilus
+    gnomecast
+    gnome-boxes
+    gnome-tweaks
 
-		cifs-utils
+    cifs-utils
 
-		freerdp
+    freerdp
 
-		protonvpn-gui
+    protonvpn-gui
 
-		flatpak
-		gnome-software
-		syncthing
-		
-		obsidian
+    flatpak
+    gnome-software
+    syncthing
+    
+    obsidian
 
-		python3
-		# javaPackages.compiler.temurin-bin.jre-8
-		javaPackages.compiler.temurin-bin.jdk-21
-		# javaPackages.compiler.temurin-bin.jre-23
-		# javaPackages.compiler.temurin-bin.jre-25
+    # mangowc related packages
+    foot
+    wmenu
+    wl-clipboard
+    grim
+    slurp
+    swaybg
+
+
+    python3
+    # javaPackages.compiler.temurin-bin.jre-8
+    javaPackages.compiler.temurin-bin.jdk-21
+    # javaPackages.compiler.temurin-bin.jre-23
+    # javaPackages.compiler.temurin-bin.jre-25
 	];
 
 	fonts = {

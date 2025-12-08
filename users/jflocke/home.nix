@@ -8,7 +8,7 @@
         ./gnome.nix
         ./git.nix
         ./nixvim.nix
-        # ./fpga.nix
+        ./mango.nix
     ];
 
     programs.nixvim = {

@@ -10,17 +10,22 @@
             url = "github:nix-community/nixvim";
             inputs.nixpkgs.follows = "nixpkgs";
         };
+        mangowc = {
+            url = "github:DreamMaoMao/mangowc";
+            inputs.nixpkgs.follows = "nixpkgs";
+        };
         catppuccin = {
             url = "github:catppuccin/nix";
             inputs.nixpkgs.follows = "nixpkgs";
         };
     };
 
-    outputs = { self, nixpkgs, catppuccin, home-manager, nixvim, ... }: {
+    outputs = { self, nixpkgs, catppuccin, home-manager, nixvim, mangowc, ... }: {
         nixosConfigurations.ideapad = nixpkgs.lib.nixosSystem {
             system = "x86_64-Linux";
             modules = [
                 ./hosts/ideapad/configuration.nix
+                mangowc.nixosModules.mango
                 home-manager.nixosModules.home-manager
                 {
                     home-manager = {
@@ -30,6 +35,7 @@
                             imports = [
                                 catppuccin.homeModules.catppuccin
                                 nixvim.homeModules.nixvim
+                                mangowc.hmModules.mango
                                 ./users/jflocke/home.nix
                           ];
                         };
@@ -42,6 +48,7 @@
             system = "x86_64-Linux";
             modules = [
                 ./hosts/yoga/configuration.nix
+                mangowc.nixosModules.mango
                 home-manager.nixosModules.home-manager
                 {
                     home-manager = {
@@ -51,6 +58,7 @@
                             imports = [
                                 catppuccin.homeModules.catppuccin
                                 nixvim.homeModules.nixvim
+                                mangowc.hmModules.mango
                                 ./users/jflocke/home.nix
                           ];
                         };
@@ -63,6 +71,7 @@
             system = "x86_64-Linux";
             modules = [
                 ./hosts/onyx/configuration.nix
+                mangowc.nixosModules.mango
                 home-manager.nixosModules.home-manager
                 {
                     home-manager = {
@@ -72,6 +81,7 @@
                             imports = [
                                 catppuccin.homeModules.catppuccin
                                 nixvim.homeModules.nixvim
+                                mangowc.hmModules.mango
                                 ./users/jflocke/home.nix
                           ];
                         };
