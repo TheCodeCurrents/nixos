@@ -26,13 +26,10 @@
 		enable = true;
 		xkb.layout = "de";
 
-		# You can still use GDM if you want to switch between GNOME and Qtile
 		# displayManager.gdm.enable = true;
 
 		autoRepeatDelay = 200;
 		autoRepeatInterval = 35;
-
-		windowManager.qtile.enable = true;
 	};
 
 	services.desktopManager.gnome = {
