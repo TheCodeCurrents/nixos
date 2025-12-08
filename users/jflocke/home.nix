@@ -5,7 +5,6 @@
 
     imports = [
         ./terminal.nix
-        ./hyprland.nix
         ./gnome.nix
         ./git.nix
         ./nixvim.nix
