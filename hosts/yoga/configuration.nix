@@ -6,6 +6,7 @@
       ../../modules/common.nix
       ./hardware-configuration.nix
       ./wireguard.nix
+      ./speakers.nix
     ];
 
   hardware.graphics = {
