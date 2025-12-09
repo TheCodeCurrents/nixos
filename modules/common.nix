@@ -32,8 +32,6 @@
 		autoRepeatInterval = 35;
 	};
 
-	programs.mango.enable = true;
-
 	services.desktopManager.gnome = {
 		enable = true;
 	};
@@ -179,9 +177,8 @@
 		];
 	};
 
-
-	programs.hyprland.enable = true;
 	programs.niri.enable = true;
+	programs.mango.enable = true;
 
 	xdg.portal = {
 		enable = true;
