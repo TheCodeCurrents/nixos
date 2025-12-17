@@ -14,7 +14,7 @@
 	boot.loader.efi.canTouchEfiVariables = true;
 	boot.kernelPackages = pkgs.linuxPackages_latest;
 	boot.kernelModules = [ "iptable_nat" "iptables" ];
-	
+
 
 	hardware.bluetooth.enable = true;
 	services.blueman.enable = true;
@@ -120,52 +120,52 @@
 
 	environment.systemPackages = with pkgs; [
 	  vim
-    vscode
-    vscode.fhs
-    wget
-    git
-    alacritty
-    direnv
-    htop
-    btop
-    networkmanager
+		vscode
+		vscode.fhs
+		wget
+		git
+		alacritty
+		direnv
+		htop
+		btop
+		networkmanager
+			
+		wineWowPackages.stable
+
+		freecad
+		cura-appimage
+
+		nautilus
+		gnomecast
+		gnome-boxes
+		gnome-tweaks
+
+		cifs-utils
+
+		freerdp
+
+		protonvpn-gui
+
+		flatpak
+		gnome-software
+		syncthing
 		
-	wineWowPackages.stable
+		obsidian
 
-    freecad
-    cura-appimage
-
-    nautilus
-    gnomecast
-    gnome-boxes
-    gnome-tweaks
-
-    cifs-utils
-
-    freerdp
-
-    protonvpn-gui
-
-    flatpak
-    gnome-software
-    syncthing
-    
-    obsidian
-
-    # mangowc related packages
-    foot
-    wmenu
-    wl-clipboard
-    grim
-    slurp
-    swaybg
+		# mangowc related packages
+		foot
+		wmenu
+		wl-clipboard
+		grim
+		slurp
+		swaybg
 
 
-    python3
-    # javaPackages.compiler.temurin-bin.jre-8
-    javaPackages.compiler.temurin-bin.jdk-21
-    # javaPackages.compiler.temurin-bin.jre-23
-    # javaPackages.compiler.temurin-bin.jre-25
+		python3
+		# javaPackages.compiler.temurin-bin.jre-8
+		javaPackages.compiler.temurin-bin.jdk-21
+		# javaPackages.compiler.temurin-bin.jre-23
+		# javaPackages.compiler.temurin-bin.jre-25
 	];
 
 	fonts = {
