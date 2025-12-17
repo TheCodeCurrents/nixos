@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ pkgs, config, lib, ... }:
 
 let
   host = config.networking.hostName;
@@ -7,25 +7,28 @@ let
   onyxId = "MOLWIGA-LTJYPSJ-F4TCCJW-5AZQXHN-WF4USGP-KQHC35G-TB67PTM-XDOSUQT";
   orionId = "QXHHST3-2ZBZFZM-EXE4QPN-5PP6R6O-PU72R2Z-CZKO2MV-4SUIZ3R-TCK7EQG";
 
-  devices =
-    (if host == "onyx" then {
+  perHostDevices = {
+    onyx = {
       yoga = { id = yogaId; };
-    } else if host == "yoga" then {
-      onyx = { id = onyxId; };
-    } else {
-      yoga = { id = yogaId; };
-      onyx = { id = onyxId; };
-    }) // {
-      # always present, not part of repo
-      orion = { id = orionId; };
     };
+    yoga = {
+      onyx = { id = onyxId; };
+    };
+    ideapad = {
+      yoga = { id = yogaId; };
+      onyx = { id = onyxId; };
+    };
+  };
 
-  folderDevices =
-    if host == "onyx" then [ "yoga" ]
-    else if host == "yoga" then [ "onyx" ]
-    else [ ];
+  devices = (perHostDevices.${host} or { }) // {
+    orion = { id = orionId; };
+  };
+
+  folderDevices = builtins.attrNames (perHostDevices.${host} or { });
 in
 {
+  environment.systemPackages = [ pkgs.syncthing ];
+
   services.syncthing = {
     enable = true;
     user = "jflocke";

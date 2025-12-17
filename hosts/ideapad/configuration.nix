@@ -4,6 +4,11 @@
   imports =
     [
       ../../modules/common.nix
+      ../../modules/gaming.nix
+      ../../modules/virtualization.nix
+      ../../modules/docker.nix
+      ../../modules/syncthing.nix
+      ../../modules/wayland-wm.nix
       ./hardware-configuration.nix
     ];
 
@@ -14,10 +19,5 @@
   services.xserver.videoDrivers = [ "amdgpu" ];
 
   networking.hostName = "ideapad";
-  networking.networkmanager.enable = true;
-
-  programs.fish.enable = true;
-
-  programs.firefox.enable = true;
 
 }

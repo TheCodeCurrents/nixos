@@ -16,6 +16,8 @@
     lutris-unwrapped
     heroic-unwrapped
 
+    wineWowPackages.stable
+
     discord
     mangohud
   ];

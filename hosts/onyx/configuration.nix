@@ -4,6 +4,12 @@
   imports =
     [
       ../../modules/common.nix
+      ../../modules/gaming.nix
+      ../../modules/virtualization.nix
+      ../../modules/docker.nix
+      ../../modules/syncthing.nix
+      ../../modules/wayland-wm.nix
+      ../../modules/ollama.nix
       ./hardware-configuration.nix
       ./wireguard.nix
     ];
@@ -28,16 +34,4 @@
     glfw
     nvidia-vaapi-driver
   ];
-
-
-  # Enable networking
-  networking.networkmanager.enable = true;
-
-  # Install firefox.
-  programs.firefox.enable = true;
-
-  programs.fish.enable = true;
-
-  system.stateVersion = "25.05";
-
 }

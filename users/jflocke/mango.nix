@@ -250,7 +250,7 @@
     env=ICON_THEME,catppuccin-mocha-blue-standard
     
     # Exec commands
-    exec-once=swaybg -i /home/mina/Pictures/wallpaper.jpg
+    exec-once=swaybg -i /home/jflocke/nixos/wallpapers/jellyfish.jpg
   '';
   autostart_sh = ''
     # Autostart commands
@@ -265,8 +265,6 @@
     wl-clipboard &
 
     # Wallpaper
-    swaybg -i /home/mina/Pictures/wallpaper.jpg &
-
     # Other startup applications can be added here
   '';
  

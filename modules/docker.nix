@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ lib, pkgs, ... }:
 {
   
   virtualisation.docker = {
@@ -6,6 +6,8 @@
     enableOnBoot = true;
     package = pkgs.docker;
   };
+
+  users.users.jflocke.extraGroups = lib.mkAfter [ "docker" ];
 
   environment.systemPackages = with pkgs; [
     docker
