@@ -14,7 +14,7 @@
 	boot.loader.efi.canTouchEfiVariables = true;
 	boot.kernelPackages = pkgs.linuxPackages_latest;
 	boot.kernelModules = [ "iptable_nat" "iptables" ];
-
+	
 
 	hardware.bluetooth.enable = true;
 	services.blueman.enable = true;
@@ -36,6 +36,19 @@
 		enable = true;
 	};
 
+	services.desktopManager.gnome.extraGSettingsOverrides = ''
+		[org.gnome.mutter]
+		experimental-features=['scale-monitor-framebuffer', 'xwayland-native-scaling']
+	'';
+
+	environment.sessionVariables = {
+		NIXOS_OZONE_WL = "1";
+
+		# Optional, useful for some non-Electron apps:
+		MOZ_ENABLE_WAYLAND = "1";   # Firefox
+		SDL_VIDEODRIVER = "wayland";
+		QT_QPA_PLATFORM = "wayland";
+	};
 
 	networking.firewall.allowedTCPPorts = [ 3000 ];
 	networking.firewall.allowedUDPPorts = [ 3000 ];
@@ -103,6 +116,8 @@
 	# 	xorg.libXScrnSaver
 	# ];
 
+	programs.nix-ld.enable = true;
+
 	environment.systemPackages = with pkgs; [
 	  vim
     vscode
@@ -114,6 +129,8 @@
     htop
     btop
     networkmanager
+		
+	wineWowPackages.stable
 
     freecad
     cura-appimage
