@@ -19,7 +19,7 @@
     home.packages = with pkgs; [
 
         logisim-evolution
-        zed-editor-fhs
+        zed-editor
         
         spotify
 
