@@ -8,6 +8,7 @@
         ./gnome.nix
         ./git.nix
         ./nixvim.nix
+        ./apps.nix
     ];
 
     programs.nixvim = {
@@ -17,22 +18,13 @@
     };
 
     home.packages = with pkgs; [
-
-        logisim-evolution
-        zed-editor
-        
-        spotify
-
-        wpsoffice
-        davinci-resolve
-        gimp
-        
+        # Most apps moved to `apps.nix`; keep core dev/tooling here.
         rustc
         cargo
         esp-generate
 
         zig
-        
+
         typst
 
         gcc
@@ -45,19 +37,6 @@
 
         ventoy-full-gtk
         udisks
-
-        onlyoffice-desktopeditors
-
-        foot
-        fuzzel
-
-        winboat
-        
-        (ripes.overrideAttrs (old: {
-            cmakeFlags = (old.cmakeFlags or []) ++ [
-                "-DCMAKE_POLICY_VERSION_MINIMUM=3.5"
-            ];
-        }))
     ];
 
     programs.vscode = {
