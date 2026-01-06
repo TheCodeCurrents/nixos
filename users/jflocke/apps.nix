@@ -9,6 +9,7 @@
     # EDA / FPGA / EE
     kicad
     logisim-evolution
+    blender
 
     # Editors / IDEs
     zed-editor
