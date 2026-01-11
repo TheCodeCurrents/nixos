@@ -9,7 +9,7 @@
     # EDA / FPGA / EE
     kicad
     logisim-evolution
-    blender
+    saleae-logic-2
 
     # Editors / IDEs
     zed-editor
@@ -18,6 +18,7 @@
     spotify
     davinci-resolve
     gimp
+    blender
 
     # Office
     wpsoffice

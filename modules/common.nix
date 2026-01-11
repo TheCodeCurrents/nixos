@@ -66,6 +66,14 @@
     openocd
   ];
 
+	services.udev.extraRules = ''
+		# Cheap 24MHz Logic Analyzer (CH341/Logic clones)
+		ATTR{idVendor}=="1a86", ATTR{idProduct}=="7523", MODE="0666"
+		ATTR{idVendor}=="0925", ATTR{idProduct}=="3881", MODE="0666"
+		ATTR{idVendor}=="1d50", ATTR{idProduct}=="602b", MODE="0666"
+	'';
+
+
 	nixpkgs.config.allowUnfree = true;
 	nixpkgs.config.permittedInsecurePackages = [
 		"ventoy-gtk3-1.1.07"
