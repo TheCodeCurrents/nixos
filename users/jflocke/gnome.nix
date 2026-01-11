@@ -1,6 +1,10 @@
 { config, pkgs, ... }:
 
 {
+  home.sessionVariables = {
+    GTK_THEME = "Adwaita:dark";
+  };
+
   home.packages = with pkgs; [
     gnome-tweaks
     gnomeExtensions.vitals

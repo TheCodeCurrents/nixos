@@ -34,8 +34,9 @@
     platformio
     cargo-pio
 
+    arduino-ide
+
     # Boot / disk tools
-    ventoy-full-gtk
     udisks
 
     # Misc

@@ -67,9 +67,6 @@
   ];
 
 	nixpkgs.config.allowUnfree = true;
-	nixpkgs.config.permittedInsecurePackages = [
-		"ventoy-gtk3-1.1.07"
-	];
 
 	programs.appimage.enable = true;
 	services.flatpak.enable = true;
