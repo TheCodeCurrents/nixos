@@ -19,6 +19,8 @@
     davinci-resolve
     gimp
     blender
+    obs-studio
+    obs-cli
 
     # Office
     wpsoffice
