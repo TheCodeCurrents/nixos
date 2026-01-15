@@ -38,6 +38,8 @@
 
     arduino-ide
 
+    ansible
+
     # Boot / disk tools
     udisks
 
