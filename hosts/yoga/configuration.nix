@@ -21,6 +21,7 @@
 
   services.xserver.videoDrivers = ["nvidia"];
   hardware.nvidia.modesetting.enable = true;
+  hardware.nvidia.nvidiaSettings = true;
   hardware.nvidia.open = false;
 
   hardware.nvidia.prime = {

@@ -21,6 +21,7 @@
     blender
     obs-studio
     obs-cli
+    ffmpeg-full
 
     # Office
     wpsoffice
