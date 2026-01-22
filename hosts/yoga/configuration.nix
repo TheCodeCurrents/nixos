@@ -8,7 +8,6 @@
       ../../modules/virtualization.nix
       ../../modules/docker.nix
       ../../modules/syncthing.nix
-      ../../modules/wayland-wm.nix
       ./hardware-configuration.nix
       ./wireguard.nix
       ./speakers.nix
