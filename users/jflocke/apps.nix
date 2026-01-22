@@ -48,6 +48,7 @@
 
     # Misc
     winboat
+    remmina
 
     # Custom override kept as-is
     (ripes.overrideAttrs (old: {

@@ -14,9 +14,12 @@
             url = "github:catppuccin/nix";
             inputs.nixpkgs.follows = "nixpkgs";
         };
+        mensa = {
+            url = "git+https://git.cs.uni-paderborn.de/jflocke/mensa-tui.git";
+        };
     };
 
-    outputs = { self, nixpkgs, catppuccin, home-manager, nixvim, ... }: {
+    outputs = { self, nixpkgs, catppuccin, home-manager, nixvim, mensa, ... }: {
         # output for ideapad configuration
         nixosConfigurations.ideapad = nixpkgs.lib.nixosSystem {
             system = "x86_64-Linux";
@@ -38,6 +41,7 @@
                     };
                 }
             ];
+            specialArgs = { inherit mensa; };
         };
 
         # output for yoga configuration
@@ -61,6 +65,7 @@
                     };
                 }
             ];
+            specialArgs = { inherit mensa; };
         };
 
         # output for onyx configuration
@@ -84,6 +89,7 @@
                     };
                 }
             ];
+            specialArgs = { inherit mensa; };
         };
     };
 }

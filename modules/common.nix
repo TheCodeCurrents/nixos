@@ -1,7 +1,9 @@
 
-{ lib, pkgs, ... }:
+{ lib, pkgs, mensa, ... }:
 
 {
+
+    imports = [ ./vpn.nix ];
 
 	boot.loader.systemd-boot.enable = true;
 	boot.loader.efi.canTouchEfiVariables = true;
@@ -40,7 +42,7 @@
 	networking.firewall.allowedTCPPorts = [ 3000 ];
 	networking.firewall.allowedUDPPorts = [ 3000 ];
 	networking.firewall.enable = true;
-	networking.networkmanager.enable = true;
+
 
 	programs.fish.enable = true;
 	programs.firefox.enable = true;
@@ -105,6 +107,7 @@
 		flatpak
 		gnome-software
 		obsidian
+		mensa.packages.${pkgs.system}.mensa-tui
 
 		python3
 		javaPackages.compiler.temurin-bin.jdk-21
