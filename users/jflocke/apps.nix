@@ -12,7 +12,7 @@
     saleae-logic-2
 
     # Editors / IDEs
-    # zed-editor
+    zed-editor
 
     # Media / creative
     spotify
