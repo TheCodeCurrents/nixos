@@ -9,6 +9,7 @@
         ./git.nix
         ./nixvim.nix
         ./apps.nix
+        ./hyprland/hyprland.nix
     ];
 
     programs.nixvim = {
