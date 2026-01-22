@@ -40,6 +40,9 @@
     platformio
     cargo-pio
 
+    verilator
+    ghdl
+
     arduino-ide
 
     ansible
