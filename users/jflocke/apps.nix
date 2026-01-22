@@ -13,6 +13,7 @@
 
     # Editors / IDEs
     zed-editor
+    lapce
 
     # Media / creative
     spotify
