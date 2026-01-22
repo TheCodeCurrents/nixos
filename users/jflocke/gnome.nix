@@ -2,7 +2,8 @@
 
 {
   home.sessionVariables = {
-    GTK_THEME = "Adwaita:dark";
+    GTK_THEME = "Adwaita-dark";
+    ICON_THEME = "Adwaita";
   };
 
   home.packages = with pkgs; [
@@ -10,6 +11,8 @@
     gnomeExtensions.vitals
     gnomeExtensions.blur-my-shell
     gnomeExtensions.user-themes
+    adwaita-icon-theme
+    gnome-themes-extra
   ];
 
   dconf.settings = {
@@ -68,6 +71,7 @@
       font-antialiasing = "grayscale";
       font-hinting = "slight";
       gtk-theme = "Adwaita-dark";
+      icon-theme = "Adwaita";
       toolkit-accessibility = true;
     };
 
@@ -96,12 +100,9 @@
     };
 
     "org/gnome/shell/extensions/blur-my-shell" = {
-      show-memory = true;
-      show-cpu = true;
-      show-temperature = true;
-      show-storage = true;
-      show-network = true;
-      show-gpu = true;
+      blur-application-launcher = true;
+      blur-panel = true;
+      blur-overview = true;
     };
   };
 }
