@@ -16,6 +16,7 @@
         };
         mensa = {
             url = "git+https://git.cs.uni-paderborn.de/jflocke/mensa-tui.git";
+            flake = false;
         };
     };
 
