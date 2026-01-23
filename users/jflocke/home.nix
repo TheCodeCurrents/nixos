@@ -38,7 +38,7 @@
 
         udisks
 
-        (pkgs.callPackage "${mensa}/nix/default.nix" {})
+        mensa.packages.${pkgs.system}.default
     ];
 
     programs.vscode = {

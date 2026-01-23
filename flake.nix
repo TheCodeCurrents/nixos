@@ -16,14 +16,13 @@
         };
         mensa = {
             url = "git+https://git.cs.uni-paderborn.de/jflocke/mensa-tui.git";
-            flake = false;
         };
     };
 
     outputs = { self, nixpkgs, catppuccin, home-manager, nixvim, mensa, ... }: {
         # output for ideapad configuration
         nixosConfigurations.ideapad = nixpkgs.lib.nixosSystem {
-            system = "x86_64-Linux";
+            system = "x86_64-linux";
             modules = [
                 ./hosts/ideapad/configuration.nix
                 home-manager.nixosModules.home-manager
@@ -31,6 +30,7 @@
                     home-manager = {
                         useGlobalPkgs = true;
                         useUserPackages = true;
+                        extraSpecialArgs = { inherit mensa; };
                         users.jflocke = {
                             imports = [
                                 catppuccin.homeModules.catppuccin
@@ -55,6 +55,7 @@
                     home-manager = {
                         useGlobalPkgs = true;
                         useUserPackages = true;
+                        extraSpecialArgs = { inherit mensa; };
                         users.jflocke = {
                             imports = [
                                 catppuccin.homeModules.catppuccin
@@ -79,6 +80,7 @@
                     home-manager = {
                         useGlobalPkgs = true;
                         useUserPackages = true;
+                        extraSpecialArgs = { inherit mensa; };
                         users.jflocke = {
                             imports = [
                                 catppuccin.homeModules.catppuccin
