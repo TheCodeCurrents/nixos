@@ -46,6 +46,7 @@
 
 	programs.fish.enable = true;
 	programs.firefox.enable = true;
+	programs.hyprland.enable = true;
 
 	services.gnome.core-apps.enable = true;
 	services.gnome.core-developer-tools.enable = true;
@@ -54,6 +55,8 @@
 	services.printing.enable = true;
 	services.pulseaudio.enable = false;
 	security.rtkit.enable = true;
+	security.polkit.enable = true;
+  services.dbus.enable = true;
 	services.pipewire = {
 		enable = true;
 		alsa.enable = true;
@@ -111,6 +114,8 @@
 
 		python3
 		javaPackages.compiler.temurin-bin.jdk-21
+
+		xdg-desktop-portal-hyprland
 	];
 
 	fonts = {
@@ -140,7 +145,7 @@
 
 	xdg.portal = {
 		enable = true;
-		extraPortals = [ pkgs.xdg-desktop-portal-wlr ];
+		extraPortals = [ pkgs.xdg-desktop-portal-hyprland ];
 	};
 
 	nix.settings.experimental-features = [ "nix-command" "flakes" ];
