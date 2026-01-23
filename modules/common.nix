@@ -1,5 +1,5 @@
 
-{ lib, pkgs, mensa, ... }:
+{ lib, pkgs, ... }:
 
 {
 
@@ -110,7 +110,6 @@
 		flatpak
 		gnome-software
 		obsidian
-		mensa.packages.${pkgs.system}.mensa-tui
 
 		python3
 		javaPackages.compiler.temurin-bin.jdk-21

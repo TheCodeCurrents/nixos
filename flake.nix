@@ -22,7 +22,7 @@
     outputs = { self, nixpkgs, catppuccin, home-manager, nixvim, mensa, ... }: {
         # output for ideapad configuration
         nixosConfigurations.ideapad = nixpkgs.lib.nixosSystem {
-            system = "x86_64-Linux";
+            system = "x86_64-linux";
             modules = [
                 ./hosts/ideapad/configuration.nix
                 home-manager.nixosModules.home-manager
@@ -30,7 +30,7 @@
                     home-manager = {
                         useGlobalPkgs = true;
                         useUserPackages = true;
-                        extraSpecialArgs = { hostName = "ideapad"; };
+                        extraSpecialArgs = { inherit mensa; hostName = "ideapad"; };
                         users.jflocke = {
                             imports = [
                                 catppuccin.homeModules.catppuccin
@@ -42,7 +42,7 @@
                     };
                 }
             ];
-            specialArgs = { inherit mensa; };
+            specialArgs = { inherit mensa; hostName = "ideapad"; };
         };
 
         # output for yoga configuration
@@ -55,7 +55,7 @@
                     home-manager = {
                         useGlobalPkgs = true;
                         useUserPackages = true;
-                        extraSpecialArgs = { hostName = "yoga"; };
+                        extraSpecialArgs = { inherit mensa; hostName = "yoga"; };
                         users.jflocke = {
                             imports = [
                                 catppuccin.homeModules.catppuccin
@@ -67,7 +67,7 @@
                     };
                 }
             ];
-            specialArgs = { inherit mensa; };
+            specialArgs = { inherit mensa; hostName = "yoga"; };
         };
 
         # output for onyx configuration
@@ -80,7 +80,7 @@
                     home-manager = {
                         useGlobalPkgs = true;
                         useUserPackages = true;
-                        extraSpecialArgs = { hostName = "onyx"; };
+                        extraSpecialArgs = { inherit mensa; hostName = "onyx"; };
                         users.jflocke = {
                             imports = [
                                 catppuccin.homeModules.catppuccin
@@ -92,7 +92,7 @@
                     };
                 }
             ];
-            specialArgs = { inherit mensa; };
+            specialArgs = { inherit mensa; hostName = "onyx"; };
         };
     };
 }

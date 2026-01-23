@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, mensa,  ... }:
 {
     home.username = "jflocke";
     home.homeDirectory = "/home/jflocke";
@@ -37,6 +37,8 @@
         cargo-pio
 
         udisks
+
+        mensa.packages.${pkgs.system}.default
     ];
 
     programs.vscode = {
