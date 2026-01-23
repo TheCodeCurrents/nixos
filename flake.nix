@@ -30,6 +30,7 @@
                     home-manager = {
                         useGlobalPkgs = true;
                         useUserPackages = true;
+                        extraSpecialArgs = { hostName = "ideapad"; };
                         users.jflocke = {
                             imports = [
                                 catppuccin.homeModules.catppuccin
@@ -54,6 +55,7 @@
                     home-manager = {
                         useGlobalPkgs = true;
                         useUserPackages = true;
+                        extraSpecialArgs = { hostName = "yoga"; };
                         users.jflocke = {
                             imports = [
                                 catppuccin.homeModules.catppuccin
@@ -78,6 +80,7 @@
                     home-manager = {
                         useGlobalPkgs = true;
                         useUserPackages = true;
+                        extraSpecialArgs = { hostName = "onyx"; };
                         users.jflocke = {
                             imports = [
                                 catppuccin.homeModules.catppuccin

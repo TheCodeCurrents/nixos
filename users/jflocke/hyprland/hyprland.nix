@@ -1,10 +1,12 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, hostName ? null, ... }:
 
 {
 
-  imports = [
-    ./waybar.nix
-  ];
+  imports =
+    [
+      ./waybar.nix
+    ]
+    ++ lib.optionals (hostName != null) [ (./hosts + "/${hostName}.nix") ];
 
   wayland.windowManager.hyprland = {
     enable = true;
@@ -65,7 +67,7 @@
       };
 
       # monitor settings
-      monitor = ",preferred,auto,1.6";
+      # -> moved to host-specific config
 
       # autostart applications
       exec-once = [
