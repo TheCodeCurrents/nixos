@@ -27,7 +27,7 @@
         kb_layout = "de";
         follow_mouse = 1;
 
-        natural_scroll = true;
+        natural_scroll = false;
 
         touchpad = {
           natural_scroll = true;
