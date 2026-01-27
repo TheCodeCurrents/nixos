@@ -23,6 +23,7 @@
     obs-studio
     obs-cli
     ffmpeg-full
+    pinta
 
     # Office
     wpsoffice
