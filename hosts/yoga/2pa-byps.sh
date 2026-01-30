@@ -1,4 +1,3 @@
-[jflocke@yoga:~]$ sudo tee /usr/local/bin/2pa-byps.sh <<'EOF'
 #!/bin/bash
 
 export TERM=linux
