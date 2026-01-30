@@ -44,6 +44,8 @@
     verilator
     ghdl
 
+    cc65
+
     arduino-ide
 
     ansible
