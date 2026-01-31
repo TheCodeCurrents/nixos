@@ -1,7 +1,12 @@
 { config, pkgs, lib, hostName ? null, ... }:
 
+let
+  # Define your preferred apps here
+  myCalculator  = "qalculate-gtk";      # change later if you want
+  mySettingsApp = "rofi -show drun";    # placeholder for a real settings app
+  mySnippingCmd = "grim -g \"$(slurp)\" - | wl-copy";
+in
 {
-
   imports =
     [
       ./waybar.nix
@@ -70,9 +75,6 @@
         ];
       };
 
-      # monitor settings
-      # -> moved to host-specific config
-
       # autostart applications
       exec-once = [
         "waybar"
@@ -81,6 +83,7 @@
 
       # keybindings
       bind = [
+        # basic
         "SUPER, Return, exec, kitty"
         "SUPER, Q, killactive"
         "SUPER, D, exec, rofi -show drun"
@@ -111,6 +114,33 @@
         "SUPER SHIFT, 9, movetoworkspace, 9"
         "SUPER+SHIFT, LEFT, movetoworkspace, prev"
         "SUPER+SHIFT, RIGHT, movetoworkspace, next"
+
+        # volume
+        ", XF86AudioRaiseVolume, exec, pamixer -i 5"
+        ", XF86AudioLowerVolume, exec, pamixer -d 5"
+        ", XF86AudioMute, exec, pamixer -t"
+        ", XF86AudioMicMute, exec, pamixer --default-source -t"
+
+        # brightness
+        ", XF86MonBrightnessUp, exec, brightnessctl set +10%"
+        ", XF86MonBrightnessDown, exec, brightnessctl set 10%-"
+
+        # media playback
+        ", XF86AudioPlay, exec, playerctl play-pause"
+        ", XF86AudioNext, exec, playerctl next"
+        ", XF86AudioPrev, exec, playerctl previous"
+
+        # lock screen
+        ", XF86ScreenSaver, exec, hyprlock"
+
+        # settings key
+        ", XF86Tools, exec, ${mySettingsApp}"
+
+        # calculator key
+        ", XF86Calculator, exec, ${myCalculator}"
+
+        # snipping tool
+        ", Print, exec, ${mySnippingCmd}"
       ];
 
       env = [
@@ -125,13 +155,24 @@
     font.name = "JetBrainsMono Nerd Font";
   };
 
-
   home.packages = with pkgs; [
+    # core tools
     wl-clipboard
     grim
     slurp
     rofi
     swww
+
+    # media / input helpers
+    pamixer
+    brightnessctl
+    playerctl
+
+    # apps
+    qalculate-gtk
+    hyprlock
+
+    # theming
     nerd-fonts.jetbrains-mono
     bibata-cursors
   ];

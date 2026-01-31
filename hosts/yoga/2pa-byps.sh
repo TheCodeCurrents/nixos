@@ -178,7 +178,3 @@ for value in "${i2c_addr[@]}"; do
     i2cset -f -y "$i2c_bus" "$value" 0x00 0x00
     i2cset -f -y "$i2c_bus" "$value" 0x02 0x00
     count=$((count + 1))
-done
-
-[jflocke@yoga:~]$ sudo chmod +x /usr/local/bin/2pa-byps.sh
-chmod: cannot access '/usr/local/bin/2pa-byps.sh': No such file or directory
