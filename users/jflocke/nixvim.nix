@@ -17,7 +17,8 @@
         ensure_installed = [
           "lua" "nix" "python" "rust" "javascript" "typescript"
           "html" "css" "json" "yaml" "toml" "markdown"
-          "c" "cpp" "verilog" "bash" "typst"
+          "c" "cpp" "verilog" "vhdl" "bash" "typst"
+          "go" "gomod" "gosum" "zig" "java" "lean"
         ];
       };
     };
@@ -65,6 +66,10 @@
         pyright.enable = true;
         clangd.enable = true;       # C/C++
         verible.enable = true;      # Verilog/SystemVerilog
+        vhdl_ls.enable = true;      # VHDL
+        gopls.enable = true;        # Go
+        zls.enable = true;          # Zig
+        jdtls.enable = true;        # Java
         ts_ls.enable = true;     # JS/TS
         html.enable = true;
         cssls.enable = true;
@@ -117,6 +122,14 @@
 
       -- Nvim-tree toggle
       vim.keymap.set("n", "<leader>e", "<cmd>NvimTreeToggle<cr>", { desc = "File Explorer" })
+      vim.keymap.set("n", "<leader>o", "<cmd>NvimTreeFocus<cr>", { desc = "Focus File Explorer" })
+      vim.keymap.set("n", "<leader>f", "<cmd>NvimTreeFindFile<cr>", { desc = "Reveal Current File" })
+
+      -- Toggleterm keymaps
+      vim.keymap.set({ "n", "t" }, "<leader>tt", "<cmd>ToggleTerm<cr>", { desc = "Toggle Terminal" })
+      vim.keymap.set({ "n", "t" }, "<leader>to", "<cmd>ToggleTerm direction=float<cr>", { desc = "Open Terminal (Float)" })
+      vim.keymap.set({ "n", "t" }, "<leader>tc", "<cmd>ToggleTerm direction=horizontal<cr>", { desc = "Open Terminal (Horizontal)" })
+      vim.keymap.set({ "n", "t" }, "<leader>tf", "<cmd>ToggleTermToggleAll<cr>", { desc = "Focus/Toggle All Terminals" })
     '';
   };
 }
