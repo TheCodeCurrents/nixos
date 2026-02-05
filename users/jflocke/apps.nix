@@ -41,12 +41,15 @@
     platformio
     cargo-pio
     lean4
-    spade
-    swim
-    surfer
 
     verilator
     ghdl
+    spade
+    swim
+    surfer
+    yosys
+    nextpnr
+    openfpgaloader
 
     cc65
 
