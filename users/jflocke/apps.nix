@@ -40,6 +40,10 @@
     pnpm
     platformio
     cargo-pio
+    lean4
+    spade
+    swim
+    surfer
 
     verilator
     ghdl
