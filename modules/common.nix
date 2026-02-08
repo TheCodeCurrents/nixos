@@ -49,7 +49,6 @@
 	programs.hyprland.enable = true;
 
 	services.gnome.core-apps.enable = true;
-	services.gnome.core-developer-tools.enable = true;
 
 	services.displayManager.ly.enable = true;
 	services.printing.enable = true;
@@ -82,33 +81,20 @@
 	nixpkgs.config.allowUnfree = true;
 
 	programs.appimage.enable = true;
-	services.flatpak.enable = true;
 	services.gvfs.enable = true;
 	services.udisks2.enable = true;
 	programs.nix-ld.enable = true;
 
 	environment.systemPackages = with pkgs; [
 	  	vim
-		vscode
 		wget
 		git
-		alacritty
 		direnv
 		htop
-		btop
-
-		freecad
-		cura-appimage
 
 		nautilus
-		gnomecast
-		gnome-tweaks
 
 		cifs-utils
-		freerdp
-		protonvpn-gui
-		flatpak
-		gnome-software
 		obsidian
 
 		python3
@@ -122,12 +108,7 @@
 		packages = with pkgs; [
 			noto-fonts
 			liberation_ttf
-			corefonts
-			vista-fonts
 			nerd-fonts.jetbrains-mono
-			nerd-fonts.fira-code
-			nerd-fonts.hack
-			nerd-fonts.dejavu-sans-mono
 		];
 	};	
 
@@ -148,5 +129,5 @@
 	};
 
 	nix.settings.experimental-features = [ "nix-command" "flakes" ];
-	system.stateVersion = "25.05";
+	system.stateVersion = "25.11";
 }

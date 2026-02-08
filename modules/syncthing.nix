@@ -25,6 +25,17 @@ let
   };
 
   folderDevices = builtins.attrNames (perHostDevices.${host} or { });
+
+  # helper: build full device entries for folders
+  folderDeviceAttrs =
+    if folderDevices != [] then
+      builtins.map (deviceName: {
+        name = deviceName;
+        deviceID = devices.${deviceName}.id;
+      }) folderDevices
+    else
+      null;
+
 in
 {
   environment.systemPackages = [ pkgs.syncthing ];
@@ -42,14 +53,14 @@ in
     settings = {
       inherit devices;
 
-      folders = {
-        "shared" = {
+      folders = lib.filterAttrs (name: folder: folder != null) {
+        "shared" = lib.mkIf (folderDeviceAttrs != null) {
           path = "/home/jflocke/syncthing/shared";
-          devices = folderDevices;
+          devices = folderDeviceAttrs;
         };
-        "docs" = {
+        "docs" = lib.mkIf (folderDeviceAttrs != null) {
           path = "/home/jflocke/Docs";
-          devices = folderDevices;
+          devices = folderDeviceAttrs;
         };
       };
     };

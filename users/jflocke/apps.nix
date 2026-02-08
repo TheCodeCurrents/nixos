@@ -1,68 +1,28 @@
 { config, pkgs, ... }:
 
 {
-  # "Most of the apps" moved out of `home.nix` into this dedicated module.
-  # I left shells/launchers/terminal utilities and editor-specific config alone
-  # since those tend to belong in other modules (e.g. `terminal.nix`, `gnome.nix`,
-  # `nixvim.nix`, etc.).
   home.packages = with pkgs; [
-    # EDA / FPGA / EE
-    kicad
-    logisim-evolution
-    saleae-logic-2
-
-    # Editors / IDEs
-    zed-editor
-    lapce
-
-    # Media / creative
+    # ── Media ──────────────────────────────────────────────
     spotify
-    davinci-resolve
     gimp
-    blender
     obs-studio
-    obs-cli
     ffmpeg-full
-    pinta
+    davinci-resolve
 
-    # Office
-    wpsoffice
+    # ── Office ─────────────────────────────────────────────
     onlyoffice-desktopeditors
 
-    # Dev toolchains (kept here since you had them in "apps" previously)
-    rustc
-    cargo
-    esp-generate
-    zig
-    typst
-    gcc
-    nodejs_22
-    pnpm
-    platformio
-    cargo-pio
-    lean4
-
+    # ── EDA / FPGA ─────────────────────────────────────────
+    kicad
+    logisim-evolution
     verilator
-    ghdl
-    spade
-    swim
-    surfer
     yosys
-    nextpnr
     openfpgaloader
 
-    cc65
-
-    arduino-ide
-
-    ansible
-
-    # Boot / disk tools
-    udisks
-
-    # Misc
-    winboat
+    # ── Misc ───────────────────────────────────────────────
     remmina
+    ansible
+    winboat
 
     # Custom override kept as-is
     (ripes.overrideAttrs (old: {

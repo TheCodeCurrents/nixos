@@ -17,6 +17,12 @@
         SHELL = "${pkgs.fish}/bin/fish";
     };
 
+    # direnv — auto-activate dev shells when you cd into a project
+    programs.direnv = {
+        enable = true;
+        nix-direnv.enable = true;  # caches nix devShells for instant activation
+    };
+
     # Starship prompt
     programs.starship = {
         enableFishIntegration = true;
@@ -43,7 +49,6 @@
         bat.enable = true;
         starship.enable = true;
         fish.enable = true;
-        alacritty.enable = true;
         btop.enable = true;
         fzf.enable = true;
         zellij.enable = true;

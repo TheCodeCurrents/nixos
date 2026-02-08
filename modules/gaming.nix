@@ -13,8 +13,6 @@
   environment.systemPackages = with pkgs; [
     steam
     prismlauncher
-    lutris-unwrapped
-    heroic-unwrapped
 
     wineWowPackages.stable
 

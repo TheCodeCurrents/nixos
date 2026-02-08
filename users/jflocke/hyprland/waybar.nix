@@ -1,10 +1,6 @@
 { pkgs, ... }:
 
 {
-  home.packages = with pkgs; [
-    waybar
-  ];
-
   programs.waybar = {
     enable = true;
 
@@ -12,15 +8,16 @@
       mainBar = {
         layer = "top";
         position = "top";
-        height = 32;
-        margin-top = 6;
-        margin-left = 6;
-        margin-right = 6;
-
+        height = 38;
+        margin-top = 8;
+        margin-left = 10;
+        margin-right = 10;
         spacing = 0;
+        reload_style_on_change = true;
 
         modules-left = [
           "hyprland/workspaces"
+          "hyprland/window"
         ];
 
         modules-center = [
@@ -28,206 +25,378 @@
         ];
 
         modules-right = [
-          "network"
+          "tray"
+          "idle_inhibitor"
           "pulseaudio"
+          "network"
           "cpu"
           "memory"
+          "backlight"
           "battery"
         ];
 
-        # -------- Modules --------
+        # ── Workspaces ────────────────────────────
+        "hyprland/workspaces" = {
+          format = "{icon}";
+          format-icons = {
+            "1" = "1";
+            "2" = "2";
+            "3" = "3";
+            "4" = "4";
+            "5" = "5";
+            "6" = "6";
+            "7" = "7";
+            "8" = "8";
+            "9" = "9";
+            "10" = "10";
+          };
+          persistent-workspaces = {
+            "*" = 5;
+          };
+          on-scroll-up = "hyprctl dispatch workspace e+1";
+          on-scroll-down = "hyprctl dispatch workspace e-1";
+        };
+
+        # ── Window title ──────────────────────────
+        "hyprland/window" = {
+          format = "{}";
+          max-length = 40;
+          rewrite = {
+            "(.*) — Mozilla Firefox" = "󰈹 $1";
+            "(.*) - Visual Studio Code" = "󰨞 $1";
+            "(.*)kitty" = " Terminal";
+          };
+          separate-outputs = true;
+        };
+
+        # ── Clock ─────────────────────────────────
         clock = {
-          format = " {:%H:%M}";
-          tooltip-format = "{:%A, %d %B %Y}";
+          format = "  {:%H:%M}";
+          format-alt = "  {:%A, %d %B %Y}";
+          tooltip-format = "<tt><small>{calendar}</small></tt>";
+          calendar = {
+            mode = "year";
+            mode-mon-col = 3;
+            weeks-pos = "right";
+            on-scroll = 1;
+            format = {
+              months = "<span color='#cba6f7'><b>{}</b></span>";
+              days = "<span color='#cdd6f4'>{}</span>";
+              weeks = "<span color='#89b4fa'><b>W{}</b></span>";
+              weekdays = "<span color='#fab387'><b>{}</b></span>";
+              today = "<span color='#a6e3a1'><b><u>{}</u></b></span>";
+            };
+          };
         };
 
-        network = {
-          format-wifi = "󰤨 {signalStrength}%";
-          format-ethernet = "󰈀 wired";
-          format-disconnected = "󰤭";
-          tooltip = true;
+        # ── Tray ──────────────────────────────────
+        tray = {
+          icon-size = 16;
+          spacing = 8;
         };
 
+        # ── Idle inhibitor ────────────────────────
+        idle_inhibitor = {
+          format = "{icon}";
+          format-icons = {
+            activated = "󰅶";
+            deactivated = "󰾪";
+          };
+          tooltip-format-activated = "Idle inhibitor: ON";
+          tooltip-format-deactivated = "Idle inhibitor: OFF";
+        };
+
+        # ── Pulseaudio ────────────────────────────
         pulseaudio = {
           format = "{icon} {volume}%";
-          format-muted = "󰝟 muted";
+          format-muted = "󰝟  muted";
+          format-bluetooth = "󰂯 {volume}%";
           scroll-step = 5;
           format-icons = {
             headphone = "󰋋";
-            hands-free = "󰋋";
-            headset = "󰋋";
-            phone = "󰋋";
-            portable = "󰋋";
-            car = "󰋋";
             default = [ "󰕿" "󰖀" "󰕾" ];
           };
           on-click = "pavucontrol";
+          tooltip-format = "{desc} · {volume}%";
         };
 
+        # ── Network ───────────────────────────────
+        network = {
+          format-wifi = "󰤨  {signalStrength}%";
+          format-ethernet = "󰈀  {ipaddr}";
+          format-disconnected = "󰤭  off";
+          format-alt = "  {bandwidthUpBytes}   {bandwidthDownBytes}";
+          interval = 5;
+          tooltip-format-wifi = "{essid} · {signalStrength}%\n󰩟 {ipaddr}/{cidr}";
+          tooltip-format-ethernet = "󰩟 {ipaddr}/{cidr}";
+          on-click-right = "nm-connection-editor";
+        };
+
+        # ── CPU ───────────────────────────────────
         cpu = {
-          format = "󰍛 {usage}%";
-          tooltip = true;
+           format = "󰘚 {usage}%";
+           interval = 5;
+           tooltip = true;
+           format-icons = [ "󰘚" ];
         };
 
+        # ── Memory ────────────────────────────────
         memory = {
-          format = "󰆼 {percentage}%";
-          tooltip = true;
+           format = "󰍛 {percentage}%";
+           interval = 5;
+           tooltip-format = "{used:0.1f} GiB / {total:0.1f} GiB";
+           format-icons = [ "󰍛" ];
         };
 
+        # ── Backlight ─────────────────────────────
+        backlight = {
+          format = "{icon} {percent}%";
+          format-icons = [ "󰃞" "󰃟" "󰃠" ];
+          tooltip = true;
+          on-scroll-up = "brightnessctl set +5%";
+          on-scroll-down = "brightnessctl set 5%-";
+        };
+
+        # ── Battery ───────────────────────────────
         battery = {
           states = {
+            good = 80;
             warning = 30;
             critical = 15;
           };
-          format = "{icon} {capacity}%";
-          format-charging = "󰂄 {capacity}%";
-          format-plugged = "󰂄 {capacity}%";
-          format-icons = [
-            "󰁺" "󰁻" "󰁼" "󰁽"
-            "󰁾" "󰁿" "󰂀" "󰂁"
-            "󰂂" "󰁹"
-          ];
+          format = "{icon}  {capacity}%";
+          format-charging = "󰂄  {capacity}%";
+          format-plugged = "  {capacity}%";
+          format-full = "  full";
+          format-icons = [ "󰁺" "󰁻" "󰁼" "󰁽" "󰁾" "󰁿" "󰂀" "󰂁" "󰂂" "󰁹" ];
+          tooltip-format = "{timeTo} · {power:.1f}W";
         };
       };
     };
 
+    # ── Catppuccin Mocha Waybar CSS ──────────────────────
     style = ''
+      /* ── Palette (Catppuccin Mocha) ──────────────── */
+      @define-color base    #1e1e2e;
+      @define-color mantle  #181825;
+      @define-color surface0 #313244;
+      @define-color surface1 #45475a;
+      @define-color text    #cdd6f4;
+      @define-color subtext0 #a6adc8;
+      @define-color mauve   #cba6f7;
+      @define-color blue    #89b4fa;
+      @define-color sapphire #74c7ec;
+      @define-color green   #a6e3a1;
+      @define-color peach   #fab387;
+      @define-color red     #f38ba8;
+      @define-color yellow  #f9e2af;
+      @define-color flamingo #f2cdcd;
+      @define-color lavender #b4befe;
+
       * {
-        font-family: JetBrainsMono Nerd Font;
-        font-size: 12px;
+        font-family: "JetBrainsMono Nerd Font";
+        font-size: 13px;
+        font-weight: 500;
         border: none;
         border-radius: 0;
         min-height: 0;
-        transition: background 200ms cubic-bezier(0.4, 0.0, 0.2, 1);
       }
 
       window#waybar {
         background: transparent;
       }
 
-      /* Group containers */
+      /* ── Container pills ────────────────────────── */
       .modules-left,
       .modules-center,
       .modules-right {
-        background: rgba(40, 44, 52, 0.8);
+        background: alpha(@base, 0.82);
         border-radius: 16px;
-        padding: 6px 0;
-        margin: 0 8px;
-        border: 1px solid rgba(229, 233, 240, 0.15);
+        padding: 0 4px;
+        margin: 0 4px;
+        border: 1px solid alpha(@surface1, 0.5);
       }
 
-      /* Shared module base style */
+      /* ── Shared module style ────────────────────── */
       #workspaces button,
+      #window,
       #clock,
-      #network,
+      #tray,
+      #idle_inhibitor,
       #pulseaudio,
+      #network,
       #cpu,
       #memory,
+      #backlight,
       #battery {
-        padding: 8px 14px;
-        margin: 0 2px;
-        color: #e5e9f0;
+        padding: 0 12px;
+        margin: 4px 2px;
+        color: @text;
         border-radius: 12px;
+        transition: all 200ms ease;
       }
 
-      /* Workspaces module */
+      /* ── Workspaces ─────────────────────────────── */
       #workspaces {
-        margin-right: 4px;
+        padding: 0 2px;
       }
 
       #workspaces button {
-        color: #d8dee9;
+        color: @subtext0;
         background: transparent;
-        min-width: 32px;
+        padding: 0 8px;
+        min-width: 28px;
+        font-size: 12px;
       }
 
       #workspaces button.active {
-        background: #88c0d0;
-        color: #2e3440;
+        background: alpha(@mauve, 0.25);
+        color: @mauve;
         font-weight: bold;
       }
 
-      #workspaces button:hover {
-        background: rgba(136, 192, 208, 0.3);
-        color: #88c0d0;
+      #workspaces button.empty {
+        color: @surface1;
       }
 
-      /* Clock - emphasized */
+      #workspaces button:hover {
+        background: alpha(@mauve, 0.12);
+        color: @lavender;
+      }
+
+      /* ── Window title ───────────────────────────── */
+      #window {
+        color: @subtext0;
+        font-style: italic;
+        padding: 0 16px;
+      }
+
+      /* ── Clock ──────────────────────────────────── */
       #clock {
-        background: rgba(136, 192, 208, 0.15);
-        color: #88c0d0;
-        font-weight: 500;
-        margin: 0 4px;
+        color: @mauve;
+        font-weight: 700;
+        font-size: 13px;
+        padding: 0 16px;
       }
 
       #clock:hover {
-        background: rgba(136, 192, 208, 0.3);
+        background: alpha(@mauve, 0.12);
       }
 
-      /* Right-side modules */
-      #network,
-      #pulseaudio,
-      #cpu,
-      #memory,
-      #battery {
-        background: rgba(76, 86, 106, 0.4);
+      /* ── Tray ───────────────────────────────────── */
+      #tray {
+        padding: 0 8px;
       }
 
-      #network:hover,
-      #pulseaudio:hover,
-      #cpu:hover,
-      #memory:hover,
-      #battery:hover {
-        background: rgba(136, 192, 208, 0.25);
+      #tray > .passive {
+        -gtk-icon-effect: dim;
       }
 
-      /* Network */
-      #network {
-        color: #81a1c1;
+      #tray > .needs-attention {
+        -gtk-icon-effect: highlight;
       }
 
-      /* Pulseaudio */
+      /* ── Idle inhibitor ─────────────────────────── */
+      #idle_inhibitor {
+        color: @subtext0;
+      }
+
+      #idle_inhibitor.activated {
+        color: @yellow;
+        background: alpha(@yellow, 0.12);
+      }
+
+      /* ── Pulseaudio ─────────────────────────────── */
       #pulseaudio {
-        color: #a3be8c;
+        color: @green;
+      }
+
+      #pulseaudio:hover {
+        background: alpha(@green, 0.12);
       }
 
       #pulseaudio.muted {
-        background: rgba(191, 97, 106, 0.3);
-        color: #bf616a;
+        color: @red;
+        background: alpha(@red, 0.1);
       }
 
-      /* CPU */
+      /* ── Network ────────────────────────────────── */
+      #network {
+        color: @blue;
+      }
+
+      #network:hover {
+        background: alpha(@blue, 0.12);
+      }
+
+      #network.disconnected {
+        color: @surface1;
+      }
+
+      /* ── CPU ────────────────────────────────────── */
       #cpu {
-        color: #b48ead;
+        color: @lavender;
       }
 
-      /* Memory */
+      #cpu:hover {
+        background: alpha(@lavender, 0.12);
+      }
+
+      /* ── Memory ─────────────────────────────────── */
       #memory {
-        color: #d08770;
+        color: @peach;
       }
 
-      /* Battery states */
+      #memory:hover {
+        background: alpha(@peach, 0.12);
+      }
+
+      /* ── Backlight ──────────────────────────────── */
+      #backlight {
+        color: @yellow;
+      }
+
+      #backlight:hover {
+        background: alpha(@yellow, 0.12);
+      }
+
+      /* ── Battery ────────────────────────────────── */
       #battery {
-        color: #a3be8c;
+        color: @green;
+      }
+
+      #battery:hover {
+        background: alpha(@green, 0.12);
       }
 
       #battery.charging,
       #battery.plugged {
-        background: rgba(163, 190, 140, 0.25);
-        color: #a3be8c;
+        color: @green;
+        background: alpha(@green, 0.1);
+      }
+
+      #battery.good {
+        color: @green;
       }
 
       #battery.warning {
-        background: rgba(235, 203, 139, 0.35);
-        color: #ebcb8b;
+        color: @yellow;
+        background: alpha(@yellow, 0.1);
       }
 
       #battery.critical {
-        background: rgba(191, 97, 106, 0.4);
-        color: #eceff4;
+        color: @base;
+        background: @red;
+        font-weight: bold;
+        animation: blink 0.8s ease infinite alternate;
       }
 
-      /* Subtle separators for right modules - using borders instead */
+      @keyframes blink {
+        to {
+          background: alpha(@red, 0.5);
+          color: @text;
+        }
+      }
     '';
   };
 }
