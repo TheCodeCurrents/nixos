@@ -123,6 +123,7 @@
         "blur on, match:namespace waybar"
         "blur on, match:namespace rofi"
         "blur on, match:namespace notifications"
+        "blur on, match:namespace logout_dialog"
       ];
 
       # ── Autostart ──────────────────────────────────────────
@@ -134,6 +135,9 @@
         "hypridle"
         "wl-paste --type text --watch cliphist store"
         "wl-paste --type image --watch cliphist store"
+        # Start GNOME Keyring daemons
+        "dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
+        "gnome-keyring-daemon --start --components=pkcs11,secrets,ssh,gpg"
       ];
 
       # ── Env vars ───────────────────────────────────────────
@@ -249,6 +253,9 @@
         # ── Lock ─────────────────────────────────
         "$mod, backspace, exec, hyprlock"
 
+        # ── Power menu ───────────────────────────
+        "$mod SHIFT, backspace, exec, wlogout -p layer-shell"
+
         # ── Special keys ─────────────────────────
         ", XF86Calculator, exec, qalculate-gtk"
       ];
@@ -330,6 +337,151 @@
         }
       ];
     };
+  };
+
+  # ── Wlogout (power menu) ──────────────────────────────────
+  programs.wlogout = {
+    enable = true;
+    layout = [
+      {
+        label = "lock";
+        action = "hyprlock";
+        text = "Lock";
+        keybind = "l";
+      }
+      {
+        label = "logout";
+        action = "hyprctl dispatch exit";
+        text = "Logout";
+        keybind = "e";
+      }
+      {
+        label = "suspend";
+        action = "systemctl suspend";
+        text = "Suspend";
+        keybind = "s";
+      }
+      {
+        label = "reboot";
+        action = "systemctl reboot";
+        text = "Reboot";
+        keybind = "r";
+      }
+      {
+        label = "shutdown";
+        action = "systemctl poweroff";
+        text = "Shutdown";
+        keybind = "p";
+      }
+      {
+        label = "hibernate";
+        action = "systemctl hibernate";
+        text = "Hibernate";
+        keybind = "h";
+      }
+    ];
+
+    style = ''
+      @define-color base    #1e1e2e;
+      @define-color mantle  #181825;
+      @define-color surface0 #313244;
+      @define-color surface1 #45475a;
+      @define-color text    #cdd6f4;
+      @define-color subtext0 #a6adc8;
+      @define-color mauve   #cba6f7;
+      @define-color blue    #89b4fa;
+      @define-color sapphire #74c7ec;
+      @define-color green   #a6e3a1;
+      @define-color peach   #fab387;
+      @define-color red     #f38ba8;
+      @define-color yellow  #f9e2af;
+      @define-color flamingo #f2cdcd;
+
+      * {
+        font-family: "JetBrainsMono Nerd Font";
+        background-image: none;
+        transition: 200ms;
+      }
+
+      window {
+        background-color: alpha(@base, 0.85);
+      }
+
+      button {
+        color: @text;
+        background-color: alpha(@surface0, 0.6);
+        border: 2px solid alpha(@surface1, 0.5);
+        outline-style: none;
+        border-radius: 20px;
+        margin: 12px;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 30%;
+        box-shadow: 0 4px 8px alpha(#000000, 0.3);
+      }
+
+      button:focus,
+      button:active,
+      button:hover {
+        background-color: alpha(@mauve, 0.2);
+        border-color: @mauve;
+        color: @mauve;
+      }
+
+      #lock {
+        background-image: image(url("${pkgs.wlogout}/share/wlogout/icons/lock.png"));
+      }
+      #lock:hover {
+        background-image: image(url("${pkgs.wlogout}/share/wlogout/icons/lock.png"));
+        border-color: @blue;
+        background-color: alpha(@blue, 0.2);
+      }
+
+      #logout {
+        background-image: image(url("${pkgs.wlogout}/share/wlogout/icons/logout.png"));
+      }
+      #logout:hover {
+        background-image: image(url("${pkgs.wlogout}/share/wlogout/icons/logout.png"));
+        border-color: @peach;
+        background-color: alpha(@peach, 0.2);
+      }
+
+      #suspend {
+        background-image: image(url("${pkgs.wlogout}/share/wlogout/icons/suspend.png"));
+      }
+      #suspend:hover {
+        background-image: image(url("${pkgs.wlogout}/share/wlogout/icons/suspend.png"));
+        border-color: @sapphire;
+        background-color: alpha(@sapphire, 0.2);
+      }
+
+      #reboot {
+        background-image: image(url("${pkgs.wlogout}/share/wlogout/icons/reboot.png"));
+      }
+      #reboot:hover {
+        background-image: image(url("${pkgs.wlogout}/share/wlogout/icons/reboot.png"));
+        border-color: @yellow;
+        background-color: alpha(@yellow, 0.2);
+      }
+
+      #shutdown {
+        background-image: image(url("${pkgs.wlogout}/share/wlogout/icons/shutdown.png"));
+      }
+      #shutdown:hover {
+        background-image: image(url("${pkgs.wlogout}/share/wlogout/icons/shutdown.png"));
+        border-color: @red;
+        background-color: alpha(@red, 0.2);
+      }
+
+      #hibernate {
+        background-image: image(url("${pkgs.wlogout}/share/wlogout/icons/hibernate.png"));
+      }
+      #hibernate:hover {
+        background-image: image(url("${pkgs.wlogout}/share/wlogout/icons/hibernate.png"));
+        border-color: @green;
+        background-color: alpha(@green, 0.2);
+      }
+    '';
   };
 
   # ── Hypridle ─────────────────────────────────────────────
@@ -492,18 +644,23 @@
     slurp
     swww
     wtype
+    wlogout
 
     # media / input helpers
     brightnessctl
     playerctl
     pavucontrol
+    poweralertd
 
     # apps
     qalculate-gtk
+    networkmanagerapplet
 
     # theming
     nerd-fonts.jetbrains-mono
     bibata-cursors
     libnotify
+    # keyring
+    gnome-keyring
   ];
 }

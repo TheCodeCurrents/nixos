@@ -50,4 +50,18 @@
   hardware.nvidia.modesetting.enable = true;
   hardware.nvidia.nvidiaSettings = true;
   hardware.nvidia.open = false;
+  # ── Power management ──────────────────────────────────
+  services.power-profiles-daemon.enable = true;
+  services.thermald.enable = true;
+  services.upower.enable = true;
+
+  services.gnome.gnome-keyring.enable = true;
+  environment.sessionVariables = {
+    GTK_THEME = "Adwaita-dark";
+    ICON_THEME = "Adwaita";
+    MOZ_ENABLE_WAYLAND = "1";
+    XDG_CURRENT_DESKTOP = "Hyprland";
+    XDG_SESSION_DESKTOP = "Hyprland";
+    QT_QPA_PLATFORMTHEME = "qt6ct";
+  };
 }

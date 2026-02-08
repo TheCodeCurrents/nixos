@@ -1,5 +1,27 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 
+let
+  powerProfileGet = pkgs.writeShellScript "power-profile-get" ''
+    p=$(powerprofilesctl get)
+    echo "{\"text\":\"$p\",\"alt\":\"$p\",\"tooltip\":\"Power profile: $p\"}"
+  '';
+
+  powerProfileCycle = pkgs.writeShellScript "power-profile-cycle" ''
+    case "$(powerprofilesctl get)" in
+      power-saver)  powerprofilesctl set balanced    ;;
+      balanced)     powerprofilesctl set performance ;;
+      performance)  powerprofilesctl set power-saver ;;
+    esac
+  '';
+
+  powerProfileCycleReverse = pkgs.writeShellScript "power-profile-cycle-reverse" ''
+    case "$(powerprofilesctl get)" in
+      performance)  powerprofilesctl set balanced    ;;
+      balanced)     powerprofilesctl set power-saver ;;
+      power-saver)  powerprofilesctl set performance ;;
+    esac
+  '';
+in
 {
   programs.waybar = {
     enable = true;
@@ -33,6 +55,8 @@
           "memory"
           "backlight"
           "battery"
+          "custom/power-profile"
+          "custom/power"
         ];
 
         # ── Workspaces ────────────────────────────
@@ -122,14 +146,16 @@
 
         # ── Network ───────────────────────────────
         network = {
-          format-wifi = "󰤨  {signalStrength}%";
-          format-ethernet = "󰈀  {ipaddr}";
-          format-disconnected = "󰤭  off";
-          format-alt = "  {bandwidthUpBytes}   {bandwidthDownBytes}";
+          format-wifi = "{icon}";
+          format-ethernet = "󰈀";
+          format-disconnected = "󰤭";
+          format-linked = "󰈁";
+          format-icons = [ "󰤯" "󰤟" "󰤢" "󰤥" "󰤨" ];
           interval = 5;
-          tooltip-format-wifi = "{essid} · {signalStrength}%\n󰩟 {ipaddr}/{cidr}";
-          tooltip-format-ethernet = "󰩟 {ipaddr}/{cidr}";
-          on-click-right = "nm-connection-editor";
+          tooltip-format-wifi = "  {essid}\n󰤨  {signalStrength}%\n󰩟  {ipaddr}/{cidr}\n  {bandwidthUpBytes}    {bandwidthDownBytes}";
+          tooltip-format-ethernet = "󰈀  Wired\n󰩟  {ipaddr}/{cidr}\n  {bandwidthUpBytes}    {bandwidthDownBytes}";
+          tooltip-format-disconnected = "󰤭  Disconnected";
+          on-click = "nm-connection-editor";
         };
 
         # ── CPU ───────────────────────────────────
@@ -170,6 +196,31 @@
           format-full = "  full";
           format-icons = [ "󰁺" "󰁻" "󰁼" "󰁽" "󰁾" "󰁿" "󰂀" "󰂁" "󰂂" "󰁹" ];
           tooltip-format = "{timeTo} · {power:.1f}W";
+        };
+
+        # ── Power profile indicator ────────────────
+        "custom/power-profile" = {
+          format = "{icon}";
+          format-icons = {
+            "power-saver" = "󰌪";
+            "balanced" = "󰗑";
+            "performance" = "󱐋";
+          };
+          exec = "${powerProfileGet}";
+          return-type = "json";
+          exec-on-event = true;
+          interval = 5;
+          on-click = "${powerProfileCycle}";
+          on-click-right = "${powerProfileCycleReverse}";
+          tooltip = true;
+        };
+
+        # ── Power menu ────────────────────────────
+        "custom/power" = {
+          format = "⏻";
+          tooltip = true;
+          tooltip-format = "Power Menu";
+          on-click = "wlogout -p layer-shell";
         };
       };
     };
@@ -228,7 +279,9 @@
       #cpu,
       #memory,
       #backlight,
-      #battery {
+      #battery,
+      #custom-power-profile,
+      #custom-power {
         padding: 0 12px;
         margin: 4px 2px;
         color: @text;
@@ -322,15 +375,27 @@
 
       /* ── Network ────────────────────────────────── */
       #network {
-        color: @blue;
+        color: @sapphire;
+        font-size: 16px;
+        padding: 0 10px;
       }
 
       #network:hover {
-        background: alpha(@blue, 0.12);
+        background: alpha(@sapphire, 0.15);
+        border-radius: 12px;
       }
 
       #network.disconnected {
         color: @surface1;
+        font-size: 14px;
+      }
+
+      #network.linked {
+        color: @blue;
+      }
+
+      #network.ethernet {
+        color: @green;
       }
 
       /* ── CPU ────────────────────────────────────── */
@@ -396,6 +461,31 @@
           background: alpha(@red, 0.5);
           color: @text;
         }
+      }
+
+      /* ── Power profile indicator ────────────────── */
+      #custom-power-profile {
+        color: @flamingo;
+        font-size: 15px;
+        padding: 0 10px;
+      }
+
+      #custom-power-profile:hover {
+        background: alpha(@flamingo, 0.15);
+        border-radius: 12px;
+      }
+
+      /* ── Power menu button ─────────────────────── */
+      #custom-power {
+        color: @red;
+        font-size: 16px;
+        padding: 0 12px;
+        margin-left: 4px;
+      }
+
+      #custom-power:hover {
+        background: alpha(@red, 0.18);
+        border-radius: 12px;
       }
     '';
   };
