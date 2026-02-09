@@ -57,7 +57,6 @@
 
   services.gnome.gnome-keyring.enable = true;
   environment.sessionVariables = {
-    GTK_THEME = "Adwaita-dark";
     ICON_THEME = "Adwaita";
     MOZ_ENABLE_WAYLAND = "1";
     XDG_CURRENT_DESKTOP = "Hyprland";

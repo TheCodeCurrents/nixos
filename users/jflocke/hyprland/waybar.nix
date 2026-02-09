@@ -12,6 +12,7 @@ let
       balanced)     powerprofilesctl set performance ;;
       performance)  powerprofilesctl set power-saver ;;
     esac
+    pkill -RTMIN+8 waybar
   '';
 
   powerProfileCycleReverse = pkgs.writeShellScript "power-profile-cycle-reverse" ''
@@ -20,6 +21,7 @@ let
       balanced)     powerprofilesctl set power-saver ;;
       power-saver)  powerprofilesctl set performance ;;
     esac
+    pkill -RTMIN+8 waybar
   '';
 in
 {
@@ -209,7 +211,8 @@ in
           exec = "${powerProfileGet}";
           return-type = "json";
           exec-on-event = true;
-          interval = 5;
+          interval = 60;
+          signal = 8;
           on-click = "${powerProfileCycle}";
           on-click-right = "${powerProfileCycleReverse}";
           tooltip = true;

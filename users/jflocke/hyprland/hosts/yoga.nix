@@ -7,6 +7,7 @@ let
       balanced)     powerprofilesctl set performance ;;
       performance)  powerprofilesctl set power-saver ;;
     esac
+    pkill -RTMIN+8 waybar
     notify-send -t 2000 -i battery "  Power Profile" "$(powerprofilesctl get)"
   '';
 
@@ -16,6 +17,7 @@ let
       balanced)     powerprofilesctl set power-saver ;;
       power-saver)  powerprofilesctl set performance ;;
     esac
+    pkill -RTMIN+8 waybar
     notify-send -t 2000 -i battery "  Power Profile" "$(powerprofilesctl get)"
   '';
 in

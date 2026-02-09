@@ -23,6 +23,7 @@
     remmina
     ansible
     winboat
+    protonvpn-gui
 
     # Custom override kept as-is
     (ripes.overrideAttrs (old: {
