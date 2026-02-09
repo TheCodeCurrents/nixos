@@ -1,5 +1,127 @@
 { config, pkgs, lib, hostName ? null, ... }:
 
+let
+  wallpaperSwitch = pkgs.writeShellScript "wallpaper-switch" ''
+    WALLPAPER_DIR="$HOME/nixos/wallpapers"
+    [ -d "$WALLPAPER_DIR" ] || exit 0
+    img=$(find "$WALLPAPER_DIR" -type f | shuf -n 1)
+    [ -n "$img" ] || exit 0
+    swww img "$img" --transition-type grow --transition-pos center --transition-duration 1
+  '';
+
+  wifiMenu = pkgs.writeShellScript "wifi-menu" ''
+    notify="${pkgs.libnotify}/bin/notify-send"
+    nmcli="${pkgs.networkmanager}/bin/nmcli"
+    rofi="${pkgs.rofi}/bin/rofi"
+
+    wifi_dev=$($nmcli -t -f DEVICE,TYPE dev | grep ':wifi$' | head -1 | cut -d: -f1)
+    wifi_status=$($nmcli -t -f WIFI general)
+
+    if [ "$wifi_status" = "enabled" ]; then
+      toggle_label="󰤭  Disable WiFi"
+      toggle_action="off"
+    else
+      toggle_label="󰤨  Enable WiFi"
+      toggle_action="on"
+    fi
+
+    if [ "$wifi_status" = "disabled" ]; then
+      chosen=$(echo -e "$toggle_label" | $rofi -dmenu -i -p "WiFi" -theme-str 'window {width: 350px;}')
+      [ -z "$chosen" ] && exit 0
+      $nmcli radio wifi on
+      $notify "WiFi" "WiFi has been enabled"
+      exit 0
+    fi
+
+    $nmcli dev wifi rescan 2>/dev/null || true
+    sleep 0.5
+
+    tmpfile=$(mktemp /tmp/wifi-menu.XXXXXX)
+    trap 'rm -f "$tmpfile"' EXIT
+
+    $nmcli -t -f SIGNAL,SSID,SECURITY dev wifi list | \
+      sort -t: -k1 -rn | \
+      awk -F: '!seen[$2]++ && $2!="" {
+        sig=$1; ssid=$2; sec=$3
+        printf "%s\t%s\n", ssid, sec > "/dev/fd/3"
+      }' 3>"$tmpfile"
+
+    net_count=$(wc -l < "$tmpfile")
+
+    display=""
+    while IFS= read -r line; do
+      display="$display$line\n"
+    done < <($nmcli -t -f SIGNAL,SSID,SECURITY dev wifi list | \
+      sort -t: -k1 -rn | \
+      awk -F: '!seen[$2]++ && $2!="" {
+        sig=$1; ssid=$2; sec=$3
+        if (sig >= 80) icon="󰤨"
+        else if (sig >= 60) icon="󰤥"
+        else if (sig >= 40) icon="󰤢"
+        else if (sig >= 20) icon="󰤟"
+        else icon="󰤯"
+        lock = (sec != "" && sec != "--") ? "  󰌾" : ""
+        printf "%s  %s  %s%%%s\n", icon, ssid, sig, lock
+      }')
+
+    sep_idx=$net_count
+    toggle_idx=$((net_count + 1))
+    disconnect_idx=$((net_count + 2))
+    settings_idx=$((net_count + 3))
+
+    display="''${display}─────────────────\n$toggle_label\n󱘖  Disconnect\n  Settings"
+
+    idx=$(echo -e "$display" | $rofi -dmenu -i -p "WiFi" -format i \
+      -theme-str 'window {width: 420px;} listview {lines: 12;}')
+
+    [ -z "$idx" ] && exit 0
+
+    if [ "$idx" = "$toggle_idx" ]; then
+      $nmcli radio wifi "$toggle_action"
+      if [ "$toggle_action" = "off" ]; then
+        $notify "WiFi" "WiFi has been disabled"
+      else
+        $notify "WiFi" "WiFi has been enabled"
+      fi
+    elif [ "$idx" = "$disconnect_idx" ]; then
+      if [ -n "$wifi_dev" ]; then
+        $nmcli dev disconnect "$wifi_dev" 2>/dev/null
+      fi
+      $notify "WiFi" "Disconnected from WiFi"
+    elif [ "$idx" = "$settings_idx" ]; then
+      nm-connection-editor &
+    elif [ "$idx" = "$sep_idx" ]; then
+      exit 0
+    elif [ "$idx" -ge 0 ] 2>/dev/null && [ "$idx" -lt "$net_count" ]; then
+      line_num=$((idx + 1))
+      entry=$(sed -n "''${line_num}p" "$tmpfile")
+      ssid=$(echo "$entry" | cut -f1)
+      sec=$(echo "$entry" | cut -f2)
+      [ -z "$ssid" ] && exit 0
+
+      saved=$($nmcli -t -f NAME con show | grep -Fx "$ssid")
+
+      if [ -n "$saved" ]; then
+        $nmcli con up "$ssid" 2>&1 && \
+          $notify "WiFi" "Connected to $ssid" || \
+          $notify "WiFi" "Failed to connect to $ssid"
+      else
+        if [ -n "$sec" ] && [ "$sec" != "--" ]; then
+          pass=$(echo "" | $rofi -dmenu -p "Password for $ssid" -password \
+            -theme-str 'window {width: 400px;} listview {lines: 0;}')
+          [ -z "$pass" ] && exit 0
+          $nmcli dev wifi connect "$ssid" password "$pass" 2>&1 && \
+            $notify "WiFi" "Connected to $ssid" || \
+            $notify "WiFi" "Failed to connect to $ssid"
+        else
+          $nmcli dev wifi connect "$ssid" 2>&1 && \
+            $notify "WiFi" "Connected to $ssid" || \
+            $notify "WiFi" "Failed to connect to $ssid"
+        fi
+      fi
+    fi
+  '';
+in
 {
   imports =
     [
@@ -130,7 +252,7 @@
       exec-once = [
         "waybar"
         "swww-daemon"
-        "swww img $(find ~/nixos/wallpapers -type f | shuf -n 1) --transition-type grow --transition-pos center --transition-duration 1"
+        "${wallpaperSwitch}"
         "mako"
         "hypridle"
         "wl-paste --type text --watch cliphist store"
@@ -250,11 +372,17 @@
         "SHIFT, Print, exec, grim - | wl-copy"
         "$mod, Print, exec, grim -g \"$(slurp -d)\" ~/Pictures/screenshot-$(date +%Y%m%d-%H%M%S).png"
 
+        # ── Networking ────────────────────────────
+        "$mod, N, exec, ${wifiMenu}"
+
         # ── Lock ─────────────────────────────────
         "$mod, backspace, exec, hyprlock"
 
         # ── Power menu ───────────────────────────
         "$mod SHIFT, backspace, exec, wlogout -p layer-shell"
+
+        # ── Wallpaper ─────────────────────────────
+        "$mod, W, exec, ${wallpaperSwitch}"
 
         # ── Special keys ─────────────────────────
         ", XF86Calculator, exec, qalculate-gtk"

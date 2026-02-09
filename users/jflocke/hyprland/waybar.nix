@@ -23,6 +23,126 @@ let
     esac
     pkill -RTMIN+8 waybar
   '';
+
+  wifiMenu = pkgs.writeShellScript "wifi-menu" ''
+    # ── Rofi WiFi Manager ──────────────────────────────────
+    notify="${pkgs.libnotify}/bin/notify-send"
+    nmcli="${pkgs.networkmanager}/bin/nmcli"
+    rofi="${pkgs.rofi}/bin/rofi"
+
+    # Detect WiFi interface
+    wifi_dev=$($nmcli -t -f DEVICE,TYPE dev | grep ':wifi$' | head -1 | cut -d: -f1)
+
+    # Check WiFi radio state
+    wifi_status=$($nmcli -t -f WIFI general)
+
+    if [ "$wifi_status" = "enabled" ]; then
+      toggle_label="󰤭  Disable WiFi"
+      toggle_action="off"
+    else
+      toggle_label="󰤨  Enable WiFi"
+      toggle_action="on"
+    fi
+
+    # If WiFi is off, only show the enable option
+    if [ "$wifi_status" = "disabled" ]; then
+      chosen=$(echo -e "$toggle_label" | $rofi -dmenu -i -p "WiFi" -theme-str 'window {width: 350px;}')
+      [ -z "$chosen" ] && exit 0
+      $nmcli radio wifi on
+      $notify "WiFi" "WiFi has been enabled"
+      exit 0
+    fi
+
+    # Rescan networks
+    $nmcli dev wifi rescan 2>/dev/null || true
+    sleep 0.5
+
+    # Build network list with a single pass
+    # tmpfile = SSID\tSECURITY lookup, dispfile = display lines for rofi
+    tmpfile=$(mktemp /tmp/wifi-ssids.XXXXXX)
+    dispfile=$(mktemp /tmp/wifi-display.XXXXXX)
+    trap 'rm -f "$tmpfile" "$dispfile"' EXIT
+
+    $nmcli -t -f SIGNAL,SSID,SECURITY dev wifi list | \
+      sort -t: -k1 -rn | \
+      awk -F: '!seen[$2]++ && $2!="" {
+        sig=$1; ssid=$2; sec=$3
+        if (sig >= 80) icon="󰤨"
+        else if (sig >= 60) icon="󰤥"
+        else if (sig >= 40) icon="󰤢"
+        else if (sig >= 20) icon="󰤟"
+        else icon="󰤯"
+        lock = (sec != "" && sec != "--") ? "  󰌾" : ""
+        printf "%s  %s  %s%%%s\n", icon, ssid, sig, lock
+        printf "%s\t%s\n", ssid, sec > "/dev/fd/3"
+      }' 3>"$tmpfile" > "$dispfile"
+
+    net_count=$(wc -l < "$tmpfile")
+
+    # Actions appended after networks (track their indices)
+    sep_idx=$net_count
+    toggle_idx=$((net_count + 1))
+    disconnect_idx=$((net_count + 2))
+    settings_idx=$((net_count + 3))
+
+    printf '%s\n' '─────────────────' >> "$dispfile"
+    printf '%s\n' "$toggle_label" >> "$dispfile"
+    printf '%s\n' '󱘖  Disconnect' >> "$dispfile"
+    printf '%s\n' '  Settings' >> "$dispfile"
+
+    # Show rofi, get selected INDEX
+    idx=$($rofi -dmenu -i -p "WiFi" -format i \
+      -theme-str 'window {width: 420px;} listview {lines: 12;}' < "$dispfile")
+
+    [ -z "$idx" ] && exit 0
+
+    if [ "$idx" = "$toggle_idx" ]; then
+      $nmcli radio wifi "$toggle_action"
+      if [ "$toggle_action" = "off" ]; then
+        $notify "WiFi" "WiFi has been disabled"
+      else
+        $notify "WiFi" "WiFi has been enabled"
+      fi
+    elif [ "$idx" = "$disconnect_idx" ]; then
+      if [ -n "$wifi_dev" ]; then
+        $nmcli dev disconnect "$wifi_dev" 2>/dev/null
+      fi
+      $notify "WiFi" "Disconnected from WiFi"
+    elif [ "$idx" = "$settings_idx" ]; then
+      nm-connection-editor &
+    elif [ "$idx" = "$sep_idx" ]; then
+      exit 0
+    elif [ "$idx" -ge 0 ] 2>/dev/null && [ "$idx" -lt "$net_count" ]; then
+      # Look up SSID and security from the tmpfile (line = idx+1)
+      line_num=$((idx + 1))
+      entry=$(sed -n "''${line_num}p" "$tmpfile")
+      ssid=$(echo "$entry" | cut -f1)
+      sec=$(echo "$entry" | cut -f2)
+      [ -z "$ssid" ] && exit 0
+
+      # Check for a saved connection
+      saved=$($nmcli -t -f NAME con show | grep -Fx "$ssid")
+
+      if [ -n "$saved" ]; then
+        $nmcli con up "$ssid" 2>&1 && \
+          $notify "WiFi" "Connected to $ssid" || \
+          $notify "WiFi" "Failed to connect to $ssid"
+      else
+        if [ -n "$sec" ] && [ "$sec" != "--" ]; then
+          pass=$(echo "" | $rofi -dmenu -p "Password for $ssid" -password \
+            -theme-str 'window {width: 400px;} listview {lines: 0;}')
+          [ -z "$pass" ] && exit 0
+          $nmcli dev wifi connect "$ssid" password "$pass" 2>&1 && \
+            $notify "WiFi" "Connected to $ssid" || \
+            $notify "WiFi" "Failed to connect to $ssid"
+        else
+          $nmcli dev wifi connect "$ssid" 2>&1 && \
+            $notify "WiFi" "Connected to $ssid" || \
+            $notify "WiFi" "Failed to connect to $ssid"
+        fi
+      fi
+    fi
+  '';
 in
 {
   programs.waybar = {
@@ -157,7 +277,8 @@ in
           tooltip-format-wifi = "  {essid}\n󰤨  {signalStrength}%\n󰩟  {ipaddr}/{cidr}\n  {bandwidthUpBytes}    {bandwidthDownBytes}";
           tooltip-format-ethernet = "󰈀  Wired\n󰩟  {ipaddr}/{cidr}\n  {bandwidthUpBytes}    {bandwidthDownBytes}";
           tooltip-format-disconnected = "󰤭  Disconnected";
-          on-click = "nm-connection-editor";
+          on-click = "${wifiMenu}";
+          on-click-right = "nm-connection-editor";
         };
 
         # ── CPU ───────────────────────────────────

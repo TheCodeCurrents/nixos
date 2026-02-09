@@ -25,7 +25,7 @@ in
   wayland.windowManager.hyprland.settings = {
     monitor = [
       # Built-in 4K screen (exact mode and scale)
-      "eDP-1,3200x2000@60.00,0x0,2"
+      "eDP-1,3200x2000@165.00,0x0,1.67"
       # QHD external monitor (exact mode and scale)
       "HDMI-A-1,2560x1440@59.95,auto,1.33"
     ];
