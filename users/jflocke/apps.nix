@@ -25,6 +25,8 @@
     winboat
     protonvpn-gui
 
+    stm32cubemx
+
     # Custom override kept as-is
     (ripes.overrideAttrs (old: {
       cmakeFlags = (old.cmakeFlags or []) ++ [

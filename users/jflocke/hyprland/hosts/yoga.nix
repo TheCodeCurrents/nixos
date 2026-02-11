@@ -32,8 +32,8 @@ in
 
     # ── Power management / lid behaviour ──────────────────
     bindl = [
-      # Lid close → lock & suspend
-      ", switch:on:Lid Switch, exec, hyprlock && systemctl suspend"
+      # Lid close → lock & suspend (only if no external monitor)
+      ", switch:on:Lid Switch, exec, ${./suspend_if_no_external.sh}"
       # Lid open  → restore display
       ", switch:off:Lid Switch, exec, hyprctl dispatch dpms on"
     ];

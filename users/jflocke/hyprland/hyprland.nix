@@ -364,8 +364,8 @@ in
         ", XF86AudioPrev, exec, playerctl previous"
 
         # ── Brightness ───────────────────────────
-        ", XF86MonBrightnessUp, exec, brightnessctl set +5%"
-        ", XF86MonBrightnessDown, exec, brightnessctl set 5%-"
+        ", XF86MonBrightnessUp, exec, brightnessctl -d intel_backlight set +5%"
+        ", XF86MonBrightnessDown, exec, brightnessctl -d intel_backlight set 5%-"
 
         # ── Screenshot ───────────────────────────
         ", Print, exec, grim -g \"$(slurp -d)\" - | wl-copy"
