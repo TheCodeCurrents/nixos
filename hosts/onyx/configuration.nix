@@ -7,7 +7,7 @@
       ../../modules/gaming.nix
       ../../modules/virtualization.nix
       ../../modules/docker.nix
-      ../../modules/syncthing.nix
+      # ../../modules/syncthing.nix
       ../../modules/ollama.nix
       ./hardware-configuration.nix
       ./wireguard.nix

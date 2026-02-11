@@ -123,6 +123,8 @@
         ddgr            # DuckDuckGo search from terminal
         lazygit         # A simple terminal UI for git commands
         asciinema       # Terminal screen recorder
+
+        fastfetch
     ];
     
 }
